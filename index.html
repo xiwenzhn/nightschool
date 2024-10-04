@@ -34,7 +34,7 @@
       background-size: cover;
       z-index: 1;
       transition: background-image 1s ease-in-out;
-      filter: grayscale(100%) contrast(150%);  /* Ensure all background images stay black and white with high contrast */
+      filter: grayscale(100%) contrast(150%);  
     }
 
     /* Text Layer with blending mode */
@@ -49,7 +49,7 @@
       font-size: 1.2em;
       color: #FFFFC5;
       list-style: none;
-      mix-blend-mode: difference;  /* Apply blending mode here */
+      mix-blend-mode: difference;  
       transition: transform 1s ease, filter 0.5s ease;
     }
 
@@ -76,9 +76,9 @@
     /* Cluster of images positioned in the center of the screen */
     #image-cluster {
       position: absolute;
-      top: 50%;  /* Center vertically */
-      left: 50%;  /* Center horizontally */
-      transform: translate(-50%, -50%);  /* Center the cluster exactly */
+      top: 50%;  
+      left: 50%;  
+      transform: translate(-50%, -50%);  
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -88,15 +88,15 @@
     #image-cluster img {
       width: 120px;
       height: 120px;
-      transition: transform 0.5s ease, filter 0.5s ease; /* Smooth transition */
-      filter: blur(10px); /* Blur only the images */
+      transition: transform 0.5s ease, filter 0.5s ease; 
+      filter: blur(10px);
     }
 
-    /* Hover state: Enlarge the image significantly and make it clear */
+    /* Hover states*/
     #image-cluster img:hover {
-      transform: scale(5);  /* Make images significantly larger */
-      filter: blur(0px);  /* Remove blur completely */
-      z-index: 5;  /* Ensure the hovered image is on top */
+      transform: scale(5);  
+      filter: blur(0px);  
+      z-index: 5; 
     }
   </style>
 </head>
