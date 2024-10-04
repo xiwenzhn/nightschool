@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NightSchool</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: bianzhidai-Bubble;
+      word-break: keep-all;
+      font-size: 24pt;
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+      touch-action: manipulation;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background-color: white;
+      position: relative;
+    }
+
+    /* Background container that will be pixelated */
+    #background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      z-index: 1;
+      transition: background-image 1s ease-in-out;
+      filter: grayscale(100%) contrast(150%);  /* Ensure all background images stay black and white with high contrast */
+    }
+
+    /* Text Layer with blending mode */
+    nav ul li {
+      position: absolute;
+      z-index: 2;
+      background: none;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      margin: 0;
+      font-size: 1.2em;
+      color: #FFFFC5;
+      list-style: none;
+      mix-blend-mode: difference;  /* Apply blending mode here */
+      transition: transform 1s ease, filter 0.5s ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Noise layer styling */
+    #noiseCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;  
+      pointer-events: none;  
+    }
+
+    /* Cluster of images positioned in the center of the screen */
+    #image-cluster {
+      position: absolute;
+      top: 50%;  /* Center vertically */
+      left: 50%;  /* Center horizontally */
+      transform: translate(-50%, -50%);  /* Center the cluster exactly */
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      z-index: 4;
+    }
+
+    #image-cluster img {
+      width: 120px;
+      height: 120px;
+      transition: transform 0.5s ease, filter 0.5s ease; /* Smooth transition */
+      filter: blur(10px); /* Blur only the images */
+    }
+
+    /* Hover state: Enlarge the image significantly and make it clear */
+    #image-cluster img:hover {
+      transform: scale(5);  /* Make images significantly larger */
+      filter: blur(0px);  /* Remove blur completely */
+      z-index: 5;  /* Ensure the hovered image is on top */
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background pixelation div -->
+<div id="background"></div>
+
+<!-- Text items -->
+<nav>
+  <ul>
+    <li id="nav-menu-item-sessions"><a href="#">NightSchool Info</a></li>
+    <li id="nav-menu-item-acknowledgements"><a href="#">Acknowledgements</a></li>
+    <li id="nav-menu-item-reading-lists"><a href="#">Bibliography</a></li>
+    <li id="nav-menu-item-contact"><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Noise Canvas Layer -->
+<canvas id="noiseCanvas"></canvas>
+
+<!-- Cluster of images -->
+<div id="image-cluster">
+  <img src="https://cdn.shoplightspeed.com/shops/617864/files/49147485/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 1">
+  <img src="https://cdn.shoplightspeed.com/shops/617864/files/49147487/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 2">
+  <img src="https://cdn.shoplightspeed.com/shops/617864/files/49147488/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 3">
+  <img src="https://freight.cargo.site/t/original/i/75df32cdae8f0c000763d397e0dfbfdd9a4fda288e8d64354d29443cd2690952/PRECOG_V5_COVER.jpg" alt="Image 4">
+  <img src="https://i-n-g-a.com/cdn/shop/products/IMG_8421_1000x.jpg?v=1623409669" alt="Image 5">
+</div>
+
+<script>
+  const items = document.querySelectorAll("nav ul li");
+  const imageItems = document.querySelectorAll("#image-cluster img");  // Select all images in the cluster
+  const defaultSpeed = Math.PI / 30;
+  let angle = 0;
+  const radius = 120;
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+  const background = document.getElementById('background');
+
+  // Array of background images to morph between
+  const backgroundImages = [
+    'https://freight.cargo.site/t/original/i/f5146a1f2b24b4aa5ff7d43e83a1799b7f613d4e9944401229cbed97255ae422/PRECOG_V4_COVER.jpg',
+    'https://freight.cargo.site/t/original/i/2f61f8d3a034f0f664fdd6a21c412a61cbee226d0fd2ee0328f7de540423afd0/Precog_V6_Cover.png',
+    'https://freight.cargo.site/w/1500/q/75/i/52af4e9847e7ee7fd64799a9e74a06ade27084f61c0b1bc2e6b4c7b12995a375/PRECOG_V8_COVER.jpg',
+    'https://freight.cargo.site/w/1400/q/75/i/2869c992d39f380cacecfed96b0001461e37e9f7baaf3ae8d0208e9ccb3ad24e/Mag_Vol2.jpg',
+    'https://freight.cargo.site/w/1400/q/75/i/75df32cdae8f0c000763d397e0dfbfdd9a4fda288e8d64354d29443cd2690952/PRECOG_V5_COVER.jpg',
+    'https://freight.cargo.site/w/1400/q/75/i/137b2aad78332eaf89e7b3becee6572811f4600300bf3f913f3e0cb9c5db106e/Mag_Vol1.jpg'
+  ];
+  let currentImageIndex = 0;
+
+  function morphBackgroundImages() {
+    currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+    background.style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
+  }
+
+  function moveItems(items, angleOffset = 0, radiusOffset = 0) {
+    items.forEach((item, index) => {
+      let itemAngle = angle + index * (Math.PI / 10) + angleOffset;
+      const x = centerX + (radius + radiusOffset) * Math.cos(itemAngle);
+      const y = centerY + (radius + radiusOffset) * Math.sin(itemAngle);
+      item.style.transform = `translate(${x}px, ${y}px)`;
+    });
+  }
+
+  function applyPixelation() {
+    const pixelSize = Math.floor(Math.random() * 20) + 5;
+    background.style.filter = `blur(${pixelSize}px) contrast(1000%) grayscale(100%)`;
+  }
+
+  function applyNoise() {
+    const canvas = document.getElementById("noiseCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    function drawNoise() {
+      const imageData = ctx.createImageData(canvas.width, canvas.height);
+      for (let i = 0; i < imageData.data.length; i += 4) {
+        const value = (Math.random() * 255) | 0;
+        imageData.data[i] = value;
+        imageData.data[i + 1] = value;
+        imageData.data[i + 2] = value;
+        imageData.data[i + 3] = 25;
+      }
+      ctx.putImageData(imageData, 0, 0);
+    }
+
+    function loop() {
+      drawNoise();
+      requestAnimationFrame(loop);
+    }
+    loop();
+  }
+
+  function animateItems() {
+    setInterval(() => {
+      moveItems(items);
+      moveItems(imageItems, Math.PI / 1, 10);  // Move images in a cluster
+      angle += defaultSpeed;
+    }, 1000);
+
+    setInterval(() => {
+      applyPixelation();
+    }, 100);
+
+    setInterval(() => {
+      morphBackgroundImages();
+    }, 3000);
+  }
+
+  animateItems();
+  applyNoise();
+</script>
+
+</body>
+</html>
