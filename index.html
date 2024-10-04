@@ -24,7 +24,7 @@
       position: relative;
     }
 
-    /* Background container that will be pixelated */
+    /* Background container that will be pixelated and inverted */
     #background {
       position: absolute;
       top: 0;
@@ -34,7 +34,7 @@
       background-size: cover;
       z-index: 1;
       transition: background-image 1s ease-in-out;
-      filter: grayscale(100%) contrast(150%);  
+      filter: grayscale(100%) contrast(150%) invert(100%);  /* Added invert filter */
     }
 
     /* Text Layer with blending mode */
@@ -98,6 +98,21 @@
       filter: blur(0px);  
       z-index: 5; 
     }
+
+    /* Overlay image styling */
+#overlay-image {
+  position: absolute;
+  top: 50%;           /* Start positioning from the center vertically */
+  left: 50%;          /* Start positioning from the center horizontally */
+  width: auto;        /* Automatically adjust the width based on height */
+  height: auto;       /* Automatically adjust the height based on width */
+  max-width: 100vw;    /* Ensure the image doesn't exceed 80% of the viewport width */
+  max-height: 100vh;   /* Ensure the image doesn't exceed 80% of the viewport height */
+  transform: translate(-50%, -50%);  /* Center the image both vertically and horizontally */
+  z-index: 6;         /* Ensure it stays on top */
+  pointer-events: none;  /* Prevent interaction */
+}
+
   </style>
 </head>
 <body>
@@ -126,6 +141,9 @@
   <img src="https://freight.cargo.site/t/original/i/75df32cdae8f0c000763d397e0dfbfdd9a4fda288e8d64354d29443cd2690952/PRECOG_V5_COVER.jpg" alt="Image 4">
   <img src="https://i-n-g-a.com/cdn/shop/products/IMG_8421_1000x.jpg?v=1623409669" alt="Image 5">
 </div>
+
+<!-- Overlay Image -->
+<img id="overlay-image" src="file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/Night_school.png" alt="Overlay Image">
 
 <script>
   const items = document.querySelectorAll("nav ul li");
@@ -165,7 +183,7 @@
 
   function applyPixelation() {
     const pixelSize = Math.floor(Math.random() * 20) + 5;
-    background.style.filter = `blur(${pixelSize}px) contrast(1000%) grayscale(100%)`;
+    background.style.filter = `blur(${pixelSize}px) contrast(1000%) grayscale(100%) invert(100%)`;  // Apply invert effect
   }
 
   function applyNoise() {
