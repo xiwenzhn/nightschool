@@ -101,22 +101,20 @@
     nav ul.mobile-menu {
       display: none;
       position: fixed;
-      top: 60px;
-      right: 20px;
+      top: 40px;
+/*      right: 20px;*/
       background-color: white;
       flex-direction: column;
-      gap: 15px;
+/*      gap: 15px;*/
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
       z-index: 5;
       opacity: 1;
     }
 
-    nav ul.mobile-menu li {
-      font-size: 18pt; /* Smaller font size for mobile menu items */
+    /* Smaller font size for mobile menu items */
+    nav ul.mobile-menu li a {
+      font-size: 12px; /* Ensure smaller font size for mobile menu */
       color: black; /* Black text to enhance contrast */
-      opacity: 1;
     }
 
     /* Noise layer styling */
@@ -247,7 +245,11 @@
       }
 
       nav ul.mobile-menu {
-        display: flex;
+        display: none; /* Ensure menu is initially hidden */
+      }
+
+      nav ul.mobile-menu li a {
+        font-size: 12px; /* Ensure smaller font size for mobile menu */
       }
     }
   </style>
@@ -418,7 +420,11 @@
 
   // Hamburger Menu Toggle
   hamburgerMenu.addEventListener('click', () => {
-    mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+    if (mobileMenu.style.display === 'flex') {
+      mobileMenu.style.display = 'none';
+    } else {
+      mobileMenu.style.display = 'flex';
+    }
   });
 
   animateItems();
