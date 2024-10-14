@@ -102,7 +102,9 @@
       display: none;
       position: fixed;
       top: 60px;
-      right: 20px;
+      left: 0;
+      right: 0;
+      width: 100%;
       background-color: white;
       flex-direction: column;
       gap: 15px;
@@ -247,10 +249,36 @@
 
       nav ul.mobile-menu {
         display: none; /* Ensure menu is initially hidden */
+        width: 100%; /* Expand the dropdown menu to the width of the screen */
       }
 
       nav ul.mobile-menu li {
-        font-size: 14px !important; /* Ensure smaller font size for mobile menu */
+/*        font-size: 14px !important; /* Ensure smaller font size for mobile menu */*/
+      }
+
+      #clock-hand {
+        top: 50%;
+        left: 155px;
+        right: auto;
+      }
+
+      #yellow-block {
+        top: 50%;
+        left: 50%;
+        right: auto;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 100px;
+        display: none; /* Hide yellow block hover effect in mobile view */
+      }
+
+      #overlay-image {
+        top: 50%;
+        left: 50%;
+        right: auto;
+        transform: translate(-50%, -50%);
+        width: 100px;  /* Make the overlay smaller */
+        height: 100px;
       }
     }
   </style>
