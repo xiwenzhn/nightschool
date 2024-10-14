@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NightSchool</title>
   <style>
@@ -34,23 +33,59 @@
       background-size: cover;
       z-index: 1;
       transition: background-image 1s ease-in-out;
-      filter: grayscale(100%) contrast(150%) invert(100%);  /* Added invert filter */
+      filter: grayscale(100%) contrast(150%) invert(100%);
     }
 
-    /* Text Layer with blending mode */
-    nav ul li {
-      position: absolute;
+    /* Navigation links styling */
+    nav {
+      position: fixed;
+      top: 10px;
+      left: 0;
+      right: 0;
       z-index: 2;
-      background: none;
-      border: none;
-      box-shadow: none;
-      padding: 0;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      mix-blend-mode: difference;
+    }
+
+    .hamburger-menu {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      margin-right: 20px;
+    }
+
+    .hamburger-menu div {
+      width: 30px;
+      height: 4px;
+      background-color: #FFFFC5;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-grow: 1;
+      list-style: none;
       margin: 0;
+      padding: 0;
+      transition: filter 0.5s ease, opacity 0.5s ease;
+    }
+
+    nav ul li {
       font-size: 1.2em;
       color: #FFFFC5;
-      list-style: none;
-      mix-blend-mode: difference;  
-      transition: transform 1s ease, filter 0.5s ease;
+      transition: filter 0.5s ease, opacity 0.5s ease;
+      filter: blur(1px);
+      opacity: 0.3;
+    }
+
+    nav ul li:hover {
+      filter: blur(0);
+      opacity: 1;
     }
 
     a {
@@ -60,6 +95,28 @@
 
     a:hover {
       text-decoration: underline;
+    }
+
+    /* Mobile Menu Styling */
+    nav ul.mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      background-color: white;
+      flex-direction: column;
+      gap: 15px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      z-index: 5;
+      opacity: 1;
+    }
+
+    nav ul.mobile-menu li {
+      font-size: 18pt; /* Smaller font size for mobile menu items */
+      color: black; /* Black text to enhance contrast */
+      opacity: 1;
     }
 
     /* Noise layer styling */
@@ -73,62 +130,126 @@
       pointer-events: none;  
     }
 
-    /* Cluster of images positioned in the center of the screen */
+    /* Cluster of images positioned in an "L" shape in the bottom-left corner */
     #image-cluster {
       position: absolute;
-      top: 50%;  
-      left: 50%;  
-      transform: translate(-50%, -50%);  
+      bottom: 5%;
+      left: 5%;
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: flex-start;
+      z-index: 11;
+    }
+
+    #image-cluster .horizontal {
+      display: flex;
+      flex-direction: row;
       gap: 10px;
-      z-index: 4;
+    }
+
+    #image-cluster .vertical {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     #image-cluster img {
-      width: 120px;
-      height: 120px;
+      width: 100px;
+      height: 100px;
       transition: transform 0.5s ease, filter 0.5s ease; 
       filter: blur(10px);
+      z-index: 11;
     }
 
-    /* Hover states*/
+    /* Hover states */
     #image-cluster img:hover {
       transform: scale(5);  
       filter: blur(0px);  
-      z-index: 5; 
+      z-index: 20; 
     }
 
     /* Overlay image styling */
-#overlay-image {
-  position: absolute;
-  top: 50%;           
-  left: 50%;          
-  width: auto;       
-  height: auto;       
-  max-width: 100vw;    
-  max-height: 100vh;   
-  transform: translate(-50%, -50%);  
-  z-index: 6;        
-  pointer-events: none;  
-  filter: blur(1px);  
-  opacity: 80%;
-  mix-blend-mode: difference;
-}
+    #overlay-image {
+      position: fixed;
+      top: 50%;           
+      right: 18px;        
+      width: 200px;       
+      height: 200px;      
+      transform: translateY(-50%);
+      z-index: 9;         
+      pointer-events: none; 
+      filter: blur(0.4px);  
+      opacity: 100%;
+    }
 
-#overlay-image-2 {
-  position: absolute;
-  top: 50%;           
-  left: 50%;          
-  width: auto;       
-  height: auto;       
-  max-width: 100vw;    
-  max-height: 100vh;   
-  transform: translate(-50%, -50%);  
-  z-index: 7;         
-  pointer-events: none; 
-  mix-blend-mode: difference; 
-}
+    #yellow-block {
+      position: fixed;
+      top: 50%;
+      right: 18px;
+      width: 200px;
+      height: 200px;
+      transform: translateY(-50%);
+      background-color: yellow;
+      z-index: 10;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.1s ease;
+      mix-blend-mode: difference;
+    }
+
+    #clock-hand:hover + #yellow-block {
+      opacity: 0.8;
+      filter: blur(5px); /* Display yellow block with some transparency when hovered */
+    }
+
+    #overlay-image-2 {
+      position: absolute;
+      top: 50%;           
+      left: 50%;          
+      width: auto;       
+      height: auto;       
+      max-width: 100vw;    
+      max-height: 100vh;   
+      transform: translate(-50%, -50%);  
+      z-index: 7;         
+      pointer-events: none; 
+      mix-blend-mode: difference;
+    }
+
+    /* Clock Arm Styling */
+    #clock-hand {
+      position: fixed;
+      top: 50%;
+      right: 10px;
+      width: 200px;
+      height: 200px;
+      transform-origin: 50% 50%;
+      transform: translateY(-50%);
+      z-index: 8;
+      cursor: pointer;
+      mix-blend-mode: difference;
+    }
+
+    #clock-hand line {
+      stroke: #FFFFC5;
+      stroke-width: 4;
+      transition: stroke 0.3s ease;
+    }
+
+    /* Responsive Styling */
+    @media screen and (max-width: 768px) {
+      .hamburger-menu {
+        display: flex;
+      }
+
+      nav ul.desktop-menu {
+        display: none;
+      }
+
+      nav ul.mobile-menu {
+        display: flex;
+      }
+    }
   </style>
 </head>
 <body>
@@ -136,13 +257,26 @@
 <!-- Background pixelation div -->
 <div id="background"></div>
 
-<!-- Text items -->
+<!-- Navigation Bar -->
 <nav>
-  <ul>
-    <li id="nav-menu-item-sessions"><a href="#">NightSchool Info</a></li>
-    <li id="nav-menu-item-acknowledgements"><a href="#">Acknowledgements</a></li>
-    <li id="nav-menu-item-reading-lists"><a href="#">Bibliography</a></li>
-    <li id="nav-menu-item-contact"><a href="#">Contact</a></li>
+  <div class="hamburger-menu" id="hamburger-menu">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <ul id="nav-menu" class="desktop-menu">
+    <li id="nav-menu-item-about"><a href="about.html">About</a></li> 
+    <li id="nav-menu-item-contact"><a href="contact.html">Contact</a></li>
+    <li id="nav-menu-item-reading-lists"><a href="readinglist.html">Reading List</a></li>
+    <li id="nav-menu-item-sessions"><a href="file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/nightschool%20info.html">Sessions</a></li>
+    <li id="nav-menu-item-acknowledgements"><a href="acknowledgements.html">Acknowledgements</a></li> 
+  </ul>
+  <ul id="mobile-menu" class="mobile-menu">
+    <li id="nav-menu-item-about-mobile"><a href="about.html">About</a></li> 
+    <li id="nav-menu-item-contact-mobile"><a href="contact.html">Contact</a></li>
+    <li id="nav-menu-item-reading-lists-mobile"><a href="readinglist.html">Reading List</a></li>
+    <li id="nav-menu-item-sessions-mobile"><a href="file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/nightschool%20info.html">Sessions</a></li>
+    <li id="nav-menu-item-acknowledgements-mobile"><a href="acknowledgements.html">Acknowledgements</a></li> 
   </ul>
 </nav>
 
@@ -151,56 +285,76 @@
 
 <!-- Cluster of images -->
 <div id="image-cluster">
-  <img src="https://cdn.shoplightspeed.com/shops/617864/files/49147485/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 1">
-  <img src="https://cdn.shoplightspeed.com/shops/617864/files/49147487/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 2">
-  <img src="https://cdn.shoplightspeed.com/shops/617864/files/49147488/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 3">
-  <img src="https://freight.cargo.site/t/original/i/75df32cdae8f0c000763d397e0dfbfdd9a4fda288e8d64354d29443cd2690952/PRECOG_V5_COVER.jpg" alt="Image 4">
-  <img src="https://i-n-g-a.com/cdn/shop/products/IMG_8421_1000x.jpg?v=1623409669" alt="Image 5">
+  <!-- Vertical part of the L shape -->
+  <div class="vertical">
+    <img src="https://freight.cargo.site/t/original/i/75df32cdae8f0c000763d397e0dfbfdd9a4fda288e8d64354d29443cd2690952/PRECOG_V5_COVER.jpg" alt="Image 4">
+    <img src="https://i-n-g-a.com/cdn/shop/products/IMG_8421_1000x.jpg?v=1623409669" alt="Image 5">
+  </div>
+  <!-- Horizontal part of the L shape -->
+  <div class="horizontal">
+    <img src="https://cdn.shoplightspeed.com/shops/617864/files/49147485/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 1">
+    <img src="https://cdn.shoplightspeed.com/shops/617864/files/49147487/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 2">
+    <img src="https://cdn.shoplightspeed.com/shops/617864/files/49147488/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 3">
+  </div>
 </div>
 
-<!-- Overlay Image -->
+<!-- Overlay Images -->
+<svg id="clock-hand" width="200" height="200">
+  <line x1="100" y1="100" x2="100" y2="10" />
+</svg>
+<div id="yellow-block"></div>
 <img id="overlay-image" src="file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/Night_school.png" alt="Overlay Image">
 <img id="overlay-image-2" src="file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/Night_school_identity.png" alt="Overlay Image 2">
 
 <script>
-  const items = document.querySelectorAll("nav ul li");
-  const imageItems = document.querySelectorAll("#image-cluster img");  // Select all images in the cluster
-  const defaultSpeed = Math.PI / 30;
-  let angle = 0;
-  const radius = 120;
-  const centerX = window.innerWidth / 2;
-  const centerY = window.innerHeight / 2;
-  const background = document.getElementById('background');
+  const imageItems = document.querySelectorAll("#image-cluster img");
+  const clockHand = document.getElementById('clock-hand');
+  const hamburgerMenu = document.getElementById('hamburger-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+  let isPaused = false;
 
   // Array of background images to morph between
   const backgroundImages = [
-    'https://freight.cargo.site/t/original/i/f5146a1f2b24b4aa5ff7d43e83a1799b7f613d4e9944401229cbed97255ae422/PRECOG_V4_COVER.jpg',
     'https://freight.cargo.site/t/original/i/2f61f8d3a034f0f664fdd6a21c412a61cbee226d0fd2ee0328f7de540423afd0/Precog_V6_Cover.png',
+    'https://freight.cargo.site/t/original/i/f5146a1f2b24b4aa5ff7d43e83a1799b7f613d4e9944401229cbed97255ae422/PRECOG_V4_COVER.jpg',
     'https://freight.cargo.site/w/1500/q/75/i/52af4e9847e7ee7fd64799a9e74a06ade27084f61c0b1bc2e6b4c7b12995a375/PRECOG_V8_COVER.jpg',
     'https://freight.cargo.site/w/1400/q/75/i/2869c992d39f380cacecfed96b0001461e37e9f7baaf3ae8d0208e9ccb3ad24e/Mag_Vol2.jpg',
     'https://freight.cargo.site/w/1400/q/75/i/75df32cdae8f0c000763d397e0dfbfdd9a4fda288e8d64354d29443cd2690952/PRECOG_V5_COVER.jpg',
     'https://freight.cargo.site/w/1400/q/75/i/137b2aad78332eaf89e7b3becee6572811f4600300bf3f913f3e0cb9c5db106e/Mag_Vol1.jpg',
-    'file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/Main.jpg'
+    'https://freight.cargo.site/w/1400/q/75/i/bbbcadccd9949b0edb744542b03c4b05a2020d5d26e493f8b62af459da57fcdb/PRECOG_V3_WEB.jpg', 
+    'https://freight.cargo.site/w/1200/q/94/i/0f2537e323f027f1a75063d7f7bd89fd2593336b4ba0ab7bd3992a5f3d2cf772/04_-EverChangingFacade_2020.jpg',
+    'https://freight.cargo.site/w/1200/q/94/i/f21c4b47da8af544bf80fbe48549944672ce11be3e5f960621ed15534681c5/03_AllStandPointsArePartial_2020.jpg',
+    'https://freight.cargo.site/w/1200/q/94/i/b2551ebc26eb5b767bb2a37d79b6d1dcc6cb119af53e4720668dd9ebf14332fb/05_LurkingVariable_2020.jpg',
+    'https://freight.cargo.site/w/300/q/75/i/0a6fb2cd1687556129d50a723c10881b85fd740411759849d86304b9d1200132/PRECOG_LOGO.jpg'
   ];
+
   let currentImageIndex = 0;
 
   function morphBackgroundImages() {
     currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
-    background.style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
+    document.getElementById('background').style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
   }
 
-  function moveItems(items, angleOffset = 0, radiusOffset = 0) {
-    items.forEach((item, index) => {
-      let itemAngle = angle + index * (Math.PI / 10) + angleOffset;
-      const x = centerX + (radius + radiusOffset) * Math.cos(itemAngle);
-      const y = centerY + (radius + radiusOffset) * Math.sin(itemAngle);
-      item.style.transform = `translate(${x}px, ${y}px)`;
+  // Trembling effect for the image cluster
+  function trembleImageItems() {
+    if (isPaused) return;
+
+    imageItems.forEach((item) => {
+      const randomX = Math.random() * 2 - 1; // Random movement between -1px to 1px
+      const randomY = Math.random() * 2 - 1; // Random movement between -1px to 1px
+      item.style.transform = `translate(${randomX}px, ${randomY}px)`;
     });
+  }
+
+  function rotateClockHand() {
+    if (isPaused) return;
+
+    clockHand.style.transform = `translateY(-50%) rotate(${Date.now() % 60000 / 60000 * 360}deg)`;
   }
 
   function applyPixelation() {
     const pixelSize = Math.floor(Math.random() * 20) + 5;
-    background.style.filter = `blur(${pixelSize}px) contrast(1000%) grayscale(100%) invert(100%)`;  // Apply invert effect
+    document.getElementById('background').style.filter = `blur(${pixelSize}px) contrast(1000%) grayscale(100%) invert(100%)`;
   }
 
   function applyNoise() {
@@ -223,7 +377,9 @@
     }
 
     function loop() {
-      drawNoise();
+      if (!isPaused) {
+        drawNoise();
+      }
       requestAnimationFrame(loop);
     }
     loop();
@@ -231,19 +387,39 @@
 
   function animateItems() {
     setInterval(() => {
-      moveItems(items);
-      moveItems(imageItems, Math.PI / 1, 10);  // Move images in a cluster
-      angle += defaultSpeed;
-    }, 1000);
+      if (!isPaused) {
+        trembleImageItems(); // Apply trembling effect to image cluster
+      }
+    }, 100); // Slight trembling movement for images
 
     setInterval(() => {
-      applyPixelation();
+      if (!isPaused) {
+        rotateClockHand(); // Rotate the clock hand once per second
+      }
+    }, 1000); // Increment clock every second
+
+    setInterval(() => {
+      if (!isPaused) {
+        applyPixelation();
+      }
     }, 100);
 
     setInterval(() => {
-      morphBackgroundImages();
+      if (!isPaused) {
+        morphBackgroundImages();
+      }
     }, 3000);
   }
+
+  // Clock Hand click event for Play / Pause functionality
+  clockHand.addEventListener('click', () => {
+    isPaused = !isPaused;
+  });
+
+  // Hamburger Menu Toggle
+  hamburgerMenu.addEventListener('click', () => {
+    mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+  });
 
   animateItems();
   applyNoise();

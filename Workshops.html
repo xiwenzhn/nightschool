@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workshops Overview</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: bianzhidai-Base;
+      word-break: keep-all;
+      font-size: 12pt;
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+      touch-action: manipulation;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background-color: black;
+      position: relative;
+    }
+
+    /* Background container */
+    #background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      z-index: 1;
+      filter: grayscale(100%) contrast(150%);
+      transition: background-image 1s ease-in-out;
+    }
+
+    /* Content container */
+    .content {
+      position: absolute;
+      z-index: 2;
+      top: 15%;
+      left: 10%;
+      right: 10%;
+      bottom: 15%;
+      padding: 20px;
+      font-size: 1.5em;
+      line-height: 1.6em;
+      color: #FFFFFF; /* Text color changed to white */
+      overflow-y: auto;
+      column-count: 2;
+      column-gap: 400px; /* Leave space for rotating images */
+    }
+
+    p {
+      text-indent: 30px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #FFFFFF; /* Text color changed to white */
+      text-align: center;
+      margin-bottom: 20px;
+      font-family: bianzhidai-Base;
+    }
+
+    /* Image styling */
+    .rotating-image {
+      position: absolute;
+      width: 80px;
+      height: 80px; /* Set a fixed height to allow scaling */
+      z-index: 3;
+      opacity: 0.7;
+      filter: blur(5px);  
+      transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
+    }
+
+    .rotating-image:hover {
+      opacity: 1;
+      filter: blur(0px); /* Remove blur when hovering */
+      transform: scale(1.5); /* Enlarge image on hover */
+    }
+
+    /* Noise layer styling */
+    #noiseCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    /* Overlay image styling */
+    #overlay-image {
+      position: absolute;
+      top: 50%;           
+      left: 50%;          
+      width: auto;       
+      height: auto;       
+      max-width: 100vw;    
+      max-height: 100vh;   
+      transform: translate(-50%, -50%);  
+      z-index: 6;        
+      pointer-events: none;  
+      filter: blur(2px);  
+      opacity: 80%;
+      mix-blend-mode: difference;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background image -->
+<div id="background"></div>
+
+<!-- Noise Canvas Layer -->
+<canvas id="noiseCanvas"></canvas>
+
+<!-- Vertical Scroll for Images -->
+<img class="rotating-image" id="image1" src="https://cdn.shoplightspeed.com/shops/617864/files/49147485/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 1">
+<img class="rotating-image" id="image2" src="https://cdn.shoplightspeed.com/shops/617864/files/49147487/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 2">
+<img class="rotating-image" id="image3" src="https://cdn.shoplightspeed.com/shops/617864/files/49147488/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 3">
+<img class="rotating-image" id="image4" src="https://freight.cargo.site/t/original/i/75df32cdae8f0c000763d397e0dfbfdd9a4fda288e8d64354d29443cd2690952/PRECOG_V5_COVER.jpg" alt="Image 4">
+<img class="rotating-image" id="image5" src="https://i-n-g-a.com/cdn/shop/products/IMG_8421_1000x.jpg?v=1623409669" alt="Image 5">
+
+<!-- Content Area -->
+<div class="content" id="text-content">
+  <h1>Workshops Overview</h1>
+  <h2>WORKSHOP A (optional)</h2>
+  <p><strong>Title workshop:</strong> Bent Scissors, Bottom Spout: Edge-work Icons with the Krüppel Zeitung</p>
+  <p><strong>Workshop facilitator:</strong> Ren Loren Britton (they/them)</p>
+  <p><strong>Description:</strong> A pair of scissors with bent ends: not straight, not sharp; a double ended trumpet: buttons in the middle, horns on both sides; a watering can with a spout at the bottom of the drum: as soon as water is poured in, it is directly emptied out. The Krüppel Zeitung [Crip Magazine] was an anti-assimilationist queer crip magazine coming out of Bremen, Germany in the late 70’s and early 80’s: in this magazine icons repeat and hold space for non-verbal articulations of their critical politics. Towards developing practices of nonverbal expression that hold values of our practice, participants in this workshop will engage with the edge-work of their practices to develop icons that hold space for iconic-non-verbal worlding.</p>
+  
+  <h2>WORKSHOP B (optional)</h2>
+  <p><strong>Title:</strong> Projects x Platforms: Circulation in the World(s) We Want</p>
+  <p><strong>Facilitator:</strong> Caroline Woolard</p>
+  <p><strong>Description:</strong> In this workshop, participants will work together to identify the ways that discrete projects – a poster, a poem, or a pair of pants – can circulate in the world through platforms that they co-create. Participants will learn about the practices of artists, designers, and culture-bearers who are making projects and platforms in the solidarity economy movement. The solidarity economy movement connects hyperlocal and cross-sector economic justice initiatives such as cooperatives, land trusts, timebanks, mutual aid networks, open source software, and other initiatives that center community ownership and democratic governance.</p>
+
+  <h2>WORKSHOP C (required)</h2>
+  <p><strong>Title:</strong> Living Samples</p>
+  <p><strong>Facilitators:</strong> Randi Shandroski, Florencia Escudero</p>
+  <p><strong>Description:</strong> Students will translate their icon into a wearable poster using precut white oxford fabric that will be provided. Randi and Flo will present a 20 min slideshow with examples of their collaboration and inspirations for this assignment. Randi and Flo will construct a garment that functions like a wearable binder/sample book in which the student’s pages will clip into via grommets.</p>
+  
+  <h2>WORKSHOP D (required)</h2>
+  <p><strong>Title:</strong> Design as Content: Ouroboros Icon/Magazine Review</p>
+  <p><strong>Facilitator(s):</strong> Kellie Konapelsky (primary) & Gaby Collins-Fernandez</p>
+  <p><strong>Description:</strong> Group critique and review of students progress of their icon along with an overview of the creative direction for the magazine. Using this time to have group discussions of our path forward for the magazine issue and the students’ design contributions.</p>
+</div>
+
+<!-- Overlay Image -->
+<img id="overlay-image" src="file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/Night_school.png" alt="Overlay Image">
+
+<script>
+  // Adding noise canvas
+  const canvas = document.getElementById("noiseCanvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  function drawNoise() {
+    const imageData = ctx.createImageData(canvas.width, canvas.height);
+    for (let i = 0; i < imageData.data.length; i += 4) {
+      const value = Math.random() * 255;
+      imageData.data[i] = value;
+      imageData.data[i + 1] = value;
+      imageData.data[i + 2] = value;
+      imageData.data[i + 3] = 20; // Semi-transparent noise
+    }
+    ctx.putImageData(imageData, 0, 0);
+  }
+
+  function loop() {
+    drawNoise();
+    requestAnimationFrame(loop);
+  }
+
+  loop();
+
+  // Rotating images around the text with more organic randomness
+  const rotatingImages = document.querySelectorAll(".rotating-image");
+  const textContent = document.getElementById("text-content");
+  const radiusX = (window.innerWidth - textContent.clientWidth) / 2.5;
+  const radiusY = 150;
+
+  function rotateImages() {
+    const scrollPos = textContent.scrollTop;
+
+    rotatingImages.forEach((img, index) => {
+      // Creating a random speed modifier for each image to make movement organic
+      const speedModifier = 0.5 + Math.random();
+      const angleOffset = (scrollPos / 100) * speedModifier; // Adjust rotation speed for each image
+      const angle = angleOffset + index * (Math.PI / 2.5) + Math.sin(scrollPos / 50); // Adding sin for wobble effect
+
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      const x = centerX + radiusX * Math.cos(angle) - img.width / 2 + Math.sin(angle * 1.5) * 20; // Adding randomness to position
+      const y = centerY + radiusY * Math.sin(angle) - img.height / 2 + Math.cos(angle * 1.5) * 15; // Adding randomness to position
+
+      img.style.transform = `translate(${x}px, ${y}px)`;
+    });
+  }
+
+  textContent.addEventListener("scroll", rotateImages);
+</script>
+
+</body>
+</html>
