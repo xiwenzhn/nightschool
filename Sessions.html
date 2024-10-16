@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Workshops Overview</title>
+  <title>Sessions</title>
   <style>
     * {
       box-sizing: border-box;
@@ -130,26 +130,26 @@
 
 <!-- Content Area -->
 <div class="content" id="text-content">
-  <h1>Workshops Overview</h1>
-  <h2>WORKSHOP A (optional)</h2>
-  <p><strong>Title workshop:</strong> Bent Scissors, Bottom Spout: Edge-work Icons with the Krüppel Zeitung</p>
-  <p><strong>Workshop facilitator:</strong> Ren Loren Britton (they/them)</p>
-  <p><strong>Description:</strong> A pair of scissors with bent ends: not straight, not sharp; a double ended trumpet: buttons in the middle, horns on both sides; a watering can with a spout at the bottom of the drum: as soon as water is poured in, it is directly emptied out. The Krüppel Zeitung [Crip Magazine] was an anti-assimilationist queer crip magazine coming out of Bremen, Germany in the late 70’s and early 80’s: in this magazine icons repeat and hold space for non-verbal articulations of their critical politics. Towards developing practices of nonverbal expression that hold values of our practice, participants in this workshop will engage with the edge-work of their practices to develop icons that hold space for iconic-non-verbal worlding.</p>
+  Sessions Overview
+WORKSHOP A 
+  <p>Title workshop: Bent Scissors, Bottom Spout: Edge-work Icons with the Krüppel Zeitung</p>
+  <p>Facilitators: Ren Loren Britton (they/them)</p>
+  <p>A pair of scissors with bent ends: not straight, not sharp; a double ended trumpet: buttons in the middle, horns on both sides; a watering can with a spout at the bottom of the drum: as soon as water is poured in, it is directly emptied out. The Krüppel Zeitung [Crip Magazine] was an anti-assimilationist queer crip magazine coming out of Bremen, Germany in the late 70’s and early 80’s: in this magazine icons repeat and hold space for non-verbal articulations of their critical politics. Towards developing practices of nonverbal expression that hold values of our practice, participants in this workshop will engage with the edge-work of their practices to develop icons that hold space for iconic-non-verbal worlding.</p>
   
-  <h2>WORKSHOP B (optional)</h2>
-  <p><strong>Title:</strong> Projects x Platforms: Circulation in the World(s) We Want</p>
-  <p><strong>Facilitator:</strong> Caroline Woolard</p>
-  <p><strong>Description:</strong> In this workshop, participants will work together to identify the ways that discrete projects – a poster, a poem, or a pair of pants – can circulate in the world through platforms that they co-create. Participants will learn about the practices of artists, designers, and culture-bearers who are making projects and platforms in the solidarity economy movement. The solidarity economy movement connects hyperlocal and cross-sector economic justice initiatives such as cooperatives, land trusts, timebanks, mutual aid networks, open source software, and other initiatives that center community ownership and democratic governance.</p>
+WORKSHOP B 
+  <p>Projects x Platforms: Circulation in the World(s) We Want</p>
+  <p>Facilitator: Caroline Woolard</p>
+  <p>In this workshop, participants will work together to identify the ways that discrete projects – a poster, a poem, or a pair of pants – can circulate in the world through platforms that they co-create. Participants will learn about the practices of artists, designers, and culture-bearers who are making projects and platforms in the solidarity economy movement. The solidarity economy movement connects hyperlocal and cross-sector economic justice initiatives such as cooperatives, land trusts, timebanks, mutual aid networks, open source software, and other initiatives that center community ownership and democratic governance.</p>
 
-  <h2>WORKSHOP C (required)</h2>
-  <p><strong>Title:</strong> Living Samples</p>
-  <p><strong>Facilitators:</strong> Randi Shandroski, Florencia Escudero</p>
-  <p><strong>Description:</strong> Students will translate their icon into a wearable poster using precut white oxford fabric that will be provided. Randi and Flo will present a 20 min slideshow with examples of their collaboration and inspirations for this assignment. Randi and Flo will construct a garment that functions like a wearable binder/sample book in which the student’s pages will clip into via grommets.</p>
+ WORKSHOP C
+  <p>Living Samples</p>
+  <p>Facilitators: Randi Shandroski, Florencia Escudero</p>
+  <p>Students will translate their icon into a wearable poster using precut white oxford fabric that will be provided. Randi and Flo will present a 20 min slideshow with examples of their collaboration and inspirations for this assignment. Randi and Flo will construct a garment that functions like a wearable binder/sample book in which the student’s pages will clip into via grommets.</p>
   
-  <h2>WORKSHOP D (required)</h2>
-  <p><strong>Title:</strong> Design as Content: Ouroboros Icon/Magazine Review</p>
-  <p><strong>Facilitator(s):</strong> Kellie Konapelsky (primary) & Gaby Collins-Fernandez</p>
-  <p><strong>Description:</strong> Group critique and review of students progress of their icon along with an overview of the creative direction for the magazine. Using this time to have group discussions of our path forward for the magazine issue and the students’ design contributions.</p>
+WORKSHOP D
+  <p> Design as Content: Ouroboros Icon/Magazine Review</p>
+  <p>Facilitators: Kellie Konapelsky (primary) & Gaby Collins-Fernandez</p>
+  <p>Group critique and review of students progress of their icon along with an overview of the creative direction for the magazine. Using this time to have group discussions of our path forward for the magazine issue and the students’ design contributions.</p>
 </div>
 
 <!-- Overlay Image -->
@@ -187,26 +187,3 @@
   const radiusX = (window.innerWidth - textContent.clientWidth) / 2.5;
   const radiusY = 150;
 
-  function rotateImages() {
-    const scrollPos = textContent.scrollTop;
-
-    rotatingImages.forEach((img, index) => {
-      // Creating a random speed modifier for each image to make movement organic
-      const speedModifier = 0.5 + Math.random();
-      const angleOffset = (scrollPos / 100) * speedModifier; // Adjust rotation speed for each image
-      const angle = angleOffset + index * (Math.PI / 2.5) + Math.sin(scrollPos / 50); // Adding sin for wobble effect
-
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-      const x = centerX + radiusX * Math.cos(angle) - img.width / 2 + Math.sin(angle * 1.5) * 20; // Adding randomness to position
-      const y = centerY + radiusY * Math.sin(angle) - img.height / 2 + Math.cos(angle * 1.5) * 15; // Adding randomness to position
-
-      img.style.transform = `translate(${x}px, ${y}px)`;
-    });
-  }
-
-  textContent.addEventListener("scroll", rotateImages);
-</script>
-
-</body>
-</html>

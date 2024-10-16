@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NightSchool, Fall 2024</title>
+  <title>Acknowledgement</title>
   <style>
     * {
       box-sizing: border-box;
@@ -41,47 +41,19 @@
     .content {
       position: absolute;
       z-index: 2;
-      top: 15%;
-      left: 10%;
-      right: 10%;
-      bottom: 15%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       padding: 20px;
+      width: 40%; /* Shorter column width */
       font-size: 1.5em;
       line-height: 1.6em;
-      color: #FFFFFF; /* Text color changed to white */
-      overflow-y: auto;
-      column-count: 2;
-      column-gap: 400px; /* Leave space for rotating images */
+      color: #FFFFFF;
+      text-align: center;
     }
 
     p {
-      text-indent: 30px;
       margin-bottom: 20px;
-    }
-
-    h1 {
-      font-size: 2em;
-      color: #FFFFFF; /* Text color changed to white */
-      text-align: center;
-      margin-bottom: 20px;
-      font-family: bianzhidai-Base;
-    }
-
-    /* Image styling */
-    .rotating-image {
-      position: absolute;
-      width: 80px;
-      height: 80px; /* Set a fixed height to allow scaling */
-      z-index: 3;
-      opacity: 0.7;
-      filter: blur(5px);  
-      transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
-    }
-
-    .rotating-image:hover {
-      opacity: 1;
-      filter: blur(0px); /* Remove blur when hovering */
-      transform: scale(1.5); /* Enlarge image on hover */
     }
 
     /* Noise layer styling */
@@ -121,16 +93,9 @@
 <!-- Noise Canvas Layer -->
 <canvas id="noiseCanvas"></canvas>
 
-<!-- Rotating Images -->
-<img class="rotating-image" id="image1" src="https://cdn.shoplightspeed.com/shops/617864/files/49147485/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 1">
-<img class="rotating-image" id="image2" src="https://cdn.shoplightspeed.com/shops/617864/files/49147487/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 2">
-<img class="rotating-image" id="image3" src="https://cdn.shoplightspeed.com/shops/617864/files/49147488/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 3">
-<img class="rotating-image" id="image4" src="https://freight.cargo.site/t/original/i/75df32cdae8f0c000763d397e0dfbfdd9a4fda288e8d64354d29443cd2690952/PRECOG_V5_COVER.jpg" alt="Image 4">
-<img class="rotating-image" id="image5" src="https://i-n-g-a.com/cdn/shop/products/IMG_8421_1000x.jpg?v=1623409669" alt="Image 5">
-
 <!-- Content Area -->
 <div class="content" id="text-content">
-  <h1>Night School, Fall 2024</h1>
+  <p>Acknowledgement</p>
   <p>Night School, Fall 2024 is conceptualized and curated by Nontsikelelo Mutiti with support from Alvin Aishtey and Andrew Walsh-Lister.</p>
   <p>Many thanks to Tom Tang for creating the identity and promotional materials and Xiwen Zhang for building the website.</p>
   <p>This work has also been powered by the collaboration and support of Belonging at Yale initiative and the Poorvu Center for Teaching and Learning, The Traphagen Alumni Speakers Series, Yale College Office of Student Affairs, The Poynter Fellowship in Journalism at Yale, and GHP.</p>
@@ -164,32 +129,6 @@
   }
 
   loop();
-
-  // Rotating images around the text with more organic randomness
-  const rotatingImages = document.querySelectorAll(".rotating-image");
-  const textContent = document.getElementById("text-content");
-  const radiusX = (window.innerWidth - textContent.clientWidth) / 2.5;
-  const radiusY = 150;
-
-  function rotateImages() {
-    const scrollPos = textContent.scrollTop;
-
-    rotatingImages.forEach((img, index) => {
-      // Creating a random speed modifier for each image to make movement organic
-      const speedModifier = 0.5 + Math.random();
-      const angleOffset = (scrollPos / 100) * speedModifier; // Adjust rotation speed for each image
-      const angle = angleOffset + index * (Math.PI / 2.5) + Math.sin(scrollPos / 50); // Adding sin for wobble effect
-
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-      const x = centerX + radiusX * Math.cos(angle) - img.width / 2 + Math.sin(angle * 1.5) * 20; // Adding randomness to position
-      const y = centerY + radiusY * Math.sin(angle) - img.height / 2 + Math.cos(angle * 1.5) * 15; // Adding randomness to position
-
-      img.style.transform = `translate(${x}px, ${y}px)`;
-    });
-  }
-
-  textContent.addEventListener("scroll", rotateImages);
 </script>
 
 </body>

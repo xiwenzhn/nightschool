@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sessions</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: bianzhidai-Base;
+      word-break: keep-all;
+      font-size: 12pt;
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+      touch-action: manipulation;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background-color: black;
+      position: relative;
+    }
+
+    /* Content container */
+    .content {
+      position: absolute;
+      top: 10%;
+      left: 10%;
+      right: 10%;
+      bottom: 10%;
+      padding: 20px;
+      font-size: 1.5em;
+      line-height: 1.6em;
+      color: #FFFFFF;
+      text-align: justify; /* Justify text */
+      overflow-y: auto; /* Enable scrolling */
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    a {
+      color: #FFFFC5;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .workshop-title {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    /* Overlay image styling */
+    #overlay-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: auto;
+      height: auto;
+      max-width: 100vw;
+      max-height: 100vh;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      pointer-events: none;
+      filter: blur(2px);
+      opacity: 80%;
+      mix-blend-mode: difference;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Content Area -->
+<div class="content" id="text-content">
+  <p class="workshop-title">Workshop A:</p>
+  <p>—> Mel Baggs, 'In My Language’, 2007, <a href="https://youtu.be/JnylM1hI2jc">Watch on YouTube</a></p>
+  <p>—> Sins Invalid, 10 Principles of Disability Justice, 2015, <a href="https://www.sinsinvalid.org/blog/10-principles-of-disability-justice">Read the Blog</a></p>
+  <p>—> Aimi Hamraie, Building Access: Universal Design and the Politics of Disability, 2017</p>
+  <p>—> Udo Sierck & SchwarzRund, Protestgesprache: Jeden Krüppel Seinen Knüppel (Protest language: Every cripple his own stick), <a href="https://kampnagel.de/produktionen/udo-sierck-noa-winter-protestgespraeche-jedem-krueppel-seinen-krueppel">Watch the Video</a> (Video has captions in English)</p>
+
+  <p class="workshop-title">Workshop B:</p>
+  <p>—> Art.coop podcast: <a href="#">Listen here</a></p>
+  <p>—> Art.coop report: <a href="https://art.coop/assets/downloads/solidarity-not-charity_full-report.pdf">Download Report</a></p>
+  <p>—> Projects x Platforms worksheet</p>
+  <p>—> Solidarity Art Economy manifesto: <a href="https://docs.google.com/document/d/1WgGLkQgXtcJ7dZx-W7fsUkKAY-Bb_ogmpUPf0QynVRc/edit?usp=sharing">Read the Manifesto</a></p>
+  <p>—> IG for Art.coop: <a href="https://www.instagram.com/_artcoop/">Instagram</a></p>
+
+  <p class="workshop-title">Workshop C:</p>
+  <p>—> Postcard Patalogue, Pat Oleszko</p>
+  <p>—> Artwear, Fashion and Anti-fashion, Melissa Leventon</p>
+  <p>—> Off the Wall: American Art to Wear, Dilys Blum</p>
+  <p>—> Art to Wear, Julie Schafler Dale</p>
+  <p>—> Artists: Jenny Holzer (I am a Man wearable signs), Rosemary Trockel, Nicola L, East Asian religious vests, Discount Universe, Anouk Beckers, sc301, Susan Ciancolo</p>
+
+  <p class="workshop-title">Workshop D:</p>
+  <p>—> Previous Precog Magazines</p>
+  <p>—> The Situationist Times #4: <a href="https://monoskop.org/Artists_publishing">Read here</a></p>
+</div>
+
+<!-- Overlay Image -->
+<img id="overlay-image" src="file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/Night_school.png" alt="Overlay Image">
+
+</body>
+</html>

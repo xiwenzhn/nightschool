@@ -43,7 +43,7 @@
       top: 10px;
       left: 0;
       right: 0;
-      z-index: 2;
+      z-index: 900; /* Make sure nav is below hamburger when dropdown is open */
       padding: 0 20px;
       display: flex;
       justify-content: space-between;
@@ -57,6 +57,7 @@
       gap: 5px;
       cursor: pointer;
       margin-right: 20px;
+      z-index: 1000; /* Keep hamburger menu on top */
     }
 
     .hamburger-menu div {
@@ -111,7 +112,7 @@
       flex-direction: column;
       gap: 15px;
       padding: 50px 20px;
-      z-index: 5;
+      z-index: 50; /* Ensure the dropdown is below the hamburger icon */
     }
 
     nav ul.mobile-menu li {
@@ -240,8 +241,14 @@
 
     /* Responsive Styling */
     @media screen and (max-width: 768px) {
+      nav {
+        mix-blend-mode: unset; /* Override mix-blend-mode for the entire nav on mobile view */
+        z-index: 900; /* Keep nav below hamburger menu */
+      }
+
       .hamburger-menu {
         display: flex;
+        z-index: 1000; /* Make sure hamburger menu is above the mobile menu */
       }
 
       nav ul.desktop-menu {
@@ -251,10 +258,6 @@
       nav ul.mobile-menu {
         display: none; /* Ensure menu is initially hidden */
         width: 100%; /* Expand the dropdown menu to the width of the screen */
-      }
-
-      nav ul.mobile-menu li {
-/*        font-size: 14px !important; /* Ensure smaller font size for mobile menu */*/
       }
 
       #clock-hand {
@@ -297,11 +300,11 @@
     <div></div>
   </div>
   <ul id="nav-menu" class="desktop-menu">
-    <li id="nav-menu-item-about"><a href="about.html">About</a></li> 
+    <li id="nav-menu-item-about"><a href="file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/nightschool%20info.html">About</a></li> 
     <li id="nav-menu-item-contact"><a href="contact.html">Contact</a></li>
     <li id="nav-menu-item-reading-lists"><a href="readinglist.html">Reading List</a></li>
-    <li id="nav-menu-item-sessions"><a href="file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/nightschool%20info.html">Sessions</a></li>
-    <li id="nav-menu-item-acknowledgements"><a href="acknowledgements.html">Acknowledgements</a></li> 
+    <li id="nav-menu-item-sessions"><a href="file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/Sessions.html">Sessions</a></li>
+    <li id="nav-menu-item-acknowledgements"><a href="file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/acknowledgement.html">Acknowledgements</a></li> 
   </ul>
   <ul id="mobile-menu" class="mobile-menu">
     <li id="nav-menu-item-about-mobile"><a href="about.html">About</a></li> 
