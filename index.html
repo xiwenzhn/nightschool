@@ -34,6 +34,7 @@
       z-index: 1;
       transition: background-image 1s ease-in-out;
       filter: grayscale(100%) contrast(150%) invert(100%);
+      background-image: url('https://freight.cargo.site/t/original/i/2f61f8d3a034f0f664fdd6a21c412a61cbee226d0fd2ee0328f7de540423afd0/Precog_V6_Cover.png');
     }
 
     /* Navigation links styling */
@@ -101,24 +102,23 @@
     nav ul.mobile-menu {
       display: none;
       position: fixed;
-      top: 35px;
+      top: 0;
       left: 0;
       right: 0;
-      width: 100%;
-      background-color: white;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(255, 255, 255, 1); /* Opaque white background */
       flex-direction: column;
       gap: 15px;
-      padding: 20px;
-      z-index: 20;
-      styling:none;
-/*      opacity: 1;*/
+      padding: 50px 20px;
+      z-index: 5;
     }
 
-    /* Smaller font size for mobile menu items */
     nav ul.mobile-menu li {
-      font-size: 14px !important; /* Explicitly set the font size to ensure it overrides previous styles */
-      color: black; /* Black text to enhance contrast */
-/*      opacity: 1;*/
+      font-size: 24px !important; /* Explicitly set the font size to ensure it overrides previous styles */
+      color: black !important; /* Black text to enhance contrast */
+      text-align: center;
+      opacity: 1;
     }
 
     /* Noise layer styling */
@@ -242,7 +242,6 @@
     @media screen and (max-width: 768px) {
       .hamburger-menu {
         display: flex;
-
       }
 
       nav ul.desktop-menu {
@@ -252,7 +251,6 @@
       nav ul.mobile-menu {
         display: none; /* Ensure menu is initially hidden */
         width: 100%; /* Expand the dropdown menu to the width of the screen */
-
       }
 
       nav ul.mobile-menu li {
@@ -261,7 +259,7 @@
 
       #clock-hand {
         top: 50%;
-        left: 50%;
+        left: 155px;
         right: auto;
       }
 
