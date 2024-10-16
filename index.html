@@ -10,6 +10,12 @@
   /* font-weight: normal;
   font-style: normal; */
 }
+@font-face {
+  font-family: 'CirrusCumulus';
+  src: url('fonts/CirrusCumulus.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
     * {
       box-sizing: border-box;
       font-family: bianzhidai-Bubble;
@@ -120,15 +126,13 @@
       gap: 15px;
       padding: 50px 20px;
       z-index: 50; /* Ensure the dropdown is below the hamburger icon */
-
     }
 
     nav ul.mobile-menu li {
       color: black !important; /* Black text to enhance contrast */
       text-align: center;
       opacity: 1;
- 
-       
+      text-decoration: underline;
     }
 
     /* Noise layer styling */
@@ -189,7 +193,7 @@
       height: 200px;
       transform: translateY(-50%);
       z-index: 9;
-      pointer-events: none;
+      cursor: pointer;
     }
 
     /* Overlay image styling */
@@ -209,7 +213,6 @@
       height: 100%;
       transform-origin: center;
       z-index: 10;
-      cursor: pointer;
     }
 
     #clock-hand line {
@@ -256,14 +259,13 @@
     /* Responsive Styling */
     @media screen and (max-width: 768px) {
       * {
-        font-size: 15px;
-        filter: none;
+        font-family: 'CirrusCumulus';
+        font-size: 22px;
+    
       }
       nav {
         mix-blend-mode: unset; /* Override mix-blend-mode for the entire nav on mobile view */
         z-index: 900; /* Keep nav below hamburger menu */
-
-
       }
 
       .hamburger-menu {
@@ -278,8 +280,12 @@
       nav ul.mobile-menu {
         display: none; /* Ensure menu is initially hidden */
         width: 100%; /* Expand the dropdown menu to the width of the screen */
-       
+      }
 
+      nav ul.mobile-menu li {
+        filter: none;
+        opacity: 1;
+        text-decoration: underline;
       }
 
       #clock-overlay-container {
@@ -327,9 +333,9 @@
     <li id="nav-menu-item-acknowledgements"><a href="acknowledgement.html">Acknowledgements</a></li> 
   </ul>
   <ul id="mobile-menu" class="mobile-menu">
-    <li id="nav-menu-item-about-mobile"><a href="about.html">About</a></li> 
-    <li id="nav-menu-item-reading-lists-mobile"><a href="readinglist.html">Reading List</a></li>
-    <li id="nav-menu-item-sessions-mobile"><a href="file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/nightschool%20info.html">Sessions</a></li>
+    <li id="nav-menu-item-about-mobile"><a href="nightschool info.html">About</a></li> 
+    <li id="nav-menu-item-reading-lists-mobile"><a href="Reading List.html">Reading List</a></li>
+    <li id="nav-menu-item-sessions-mobile"><a href="Sessions.html">Sessions</a></li>
     <li id="nav-menu-item-acknowledgements-mobile"><a href="acknowledgements.html">Acknowledgements</a></li> 
   </ul>
 </nav>
@@ -341,14 +347,17 @@
 <div id="image-cluster">
   <!-- Vertical part of the L shape -->
   <div class="vertical">
-    <img src="https://freight.cargo.site/t/original/i/75df32cdae8f0c000763d397e0dfbfdd9a4fda288e8d64354d29443cd2690952/PRECOG_V5_COVER.jpg" alt="Image 4">
-    <img src="https://i-n-g-a.com/cdn/shop/products/IMG_8421_1000x.jpg?v=1623409669" alt="Image 5">
+    <img src="https://i.postimg.cc/1zSMW850/temp-Image0-Uw5d-X.avif" alt="Image 4">
+    <img src="https://i.postimg.cc/26zc5Vsj/temp-Image4k-VTN9.avif" alt="Image 5">
   </div>
   <!-- Horizontal part of the L shape -->
   <div class="horizontal">
-    <img src="https://cdn.shoplightspeed.com/shops/617864/files/49147485/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 1">
-    <img src="https://cdn.shoplightspeed.com/shops/617864/files/49147487/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 2">
-    <img src="https://cdn.shoplightspeed.com/shops/617864/files/49147488/1652x2313x2/precog-mag-precog-magazine-volume-1.jpg" alt="Image 3">
+
+    <img src="https://i.postimg.cc/4y0Bwwmn/temp-Image-SYzv-JW.avif" alt="Image 7"> <!-- Image 7 -->
+    <img src="https://i.postimg.cc/gJNMLGpV/temp-Imagef0-N1u-K.avif" alt="Image 2"> <!-- Image 2 -->
+    <img src="https://i.postimg.cc/CMctzsM3/temp-Imagec-UX5cq.avif" alt="Image 1">
+    <img src="https://i.postimg.cc/0jjVph5L/temp-Image-GIb-F8v.avif" alt="Image 3">
+    <img src="https://i.postimg.cc/mgC8NYR2/temp-Imageo-Jd07-X.avif" alt="Image 6">
   </div>
 </div>
 
@@ -369,6 +378,7 @@
   const yellowBlock = document.getElementById('yellow-block');
   const hamburgerMenu = document.getElementById('hamburger-menu');
   const mobileMenu = document.getElementById('mobile-menu');
+  const clockOverlayContainer = document.getElementById('clock-overlay-container');
   let isPaused = false;
 
   // Array of background images to morph between
@@ -465,8 +475,8 @@
     }, 3000);
   }
 
-  // Clock Hand click event for Play / Pause functionality
-  clockHand.addEventListener('click', () => {
+  // Clock Container click event for Play / Pause functionality
+  clockOverlayContainer.addEventListener('click', () => {
     isPaused = !isPaused;
   });
 
@@ -485,4 +495,3 @@
 
 </body>
 </html>
-
