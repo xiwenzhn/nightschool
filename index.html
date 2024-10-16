@@ -43,7 +43,7 @@
       top: 10px;
       left: 0;
       right: 0;
-      z-index: 900; /* Make sure nav is below hamburger when dropdown is open */
+      z-index: 2;
       padding: 0 20px;
       display: flex;
       justify-content: space-between;
@@ -58,12 +58,13 @@
       cursor: pointer;
       margin-right: 20px;
       z-index: 1000; /* Keep hamburger menu on top */
+      mix-blend-mode: unset; /* Make sure the color is not affected by blend mode */
     }
 
     .hamburger-menu div {
       width: 30px;
       height: 4px;
-      background-color: #FFFFC5;
+      background-color: black; /* Keep hamburger icon black */
     }
 
     nav ul {
