@@ -6,139 +6,152 @@
   <style>
 @font-face {
   font-family: 'bianzhidai-Base';
-  src: url('bianzhidai-Base.otf') format('opentype');
+  src: url('fonts/bianzhidai-Base.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'CirrusCumulus';
-  src: url('CirrusCumulus.ttf') format('truetype');
+  src: url('fonts/CirrusCumulus.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
+
 * {
-      box-sizing: border-box;
-      font-family: CirrusCumulus;
-      word-break: keep-all;
-      font-size: 12pt;
-      padding: 0;
-      margin: 0;
-      list-style-type: none;
-      touch-action: manipulation;
-    }
+  box-sizing: border-box;
+  font-family: CirrusCumulus;
+  word-break: keep-all;
+  font-size: 12pt;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  touch-action: manipulation;
+}
 
-    body {
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      background-color: black;
-      position: relative;
-    }
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: black;
+  position: relative;
+}
 
-    /* Background container */
-    #background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      z-index: 1;
-      filter: grayscale(100%) contrast(150%);
-      transition: background-image 1s ease-in-out;
-    }
+/* Background container */
+#background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  z-index: 1;
+  filter: grayscale(100%) contrast(150%);
+  transition: background-image 1s ease-in-out;
+}
 
-    /* Content container */
-    .content {
-      position: absolute;
-      z-index: 2;
-      top: 15%;
-      left: 10%;
-      right: 10%;
-      bottom: 15%;
-      padding: 20px;
-      font-size: 1.2em;
-      line-height: 1.6em;
-      color: lightyellow; /* Text color changed to white */
-      overflow-y: auto;
-      column-count: 2;
-      column-gap: 400px; /* Leave space for rotating images */
-    }
+/* Content container */
+.content {
+  position: absolute;
+  z-index: 2;
+  top: 15%;
+  left: 10%;
+  right: 10%;
+  bottom: 15%;
+  padding: 20px;
+  font-size: 1.2em;
+  line-height: 1.6em;
+  color: lightyellow;
+  overflow-y: auto;
+  column-count: 2;
+  column-gap: 400px;
+}
 
-    p {
-      text-indent: 30px;
-      margin-bottom: 20px;
-    }
+/* Mobile responsive layout */
+@media screen and (max-width: 768px) {
+  .content {
+    column-count: 1; /* Change to single column for mobile */
+    column-gap: 0;
+    top: 10%;
+    bottom: 10%;
+    padding: 10px;
+    font-size: 1.1em;
+  }
+}
 
-    h1 {
-      font-size: 2em;
-      color: #FFFFFF; /* Text color changed to white */
-      text-align: center;
-      margin-bottom: 20px;
-      font-family: bianzhidai-Base;
-    }
+p {
+  text-indent: 30px;
+  margin-bottom: 20px;
+}
 
-    /* Image styling */
-    .rotating-image {
-      position: absolute;
-      width: 80px;
-      height: auto;
-      z-index: 3;
-      opacity: 0.7;
-      filter: blur(5px);  
-      transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
-    }
+h1 {
+  font-size: 2em;
+  color: #FFFFFF;
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: bianzhidai-Base;
+}
 
-    .rotating-image:hover {
-      opacity: 1;
-      filter: blur(0px); /* Remove blur when hovering */
-      transform: scale(1.5); /* Enlarge image on hover */
-    }
+/* Image styling */
+.rotating-image {
+  position: absolute;
+  width: 80px;
+  height: auto;
+  z-index: 3;
+  opacity: 0.7;
+  filter: blur(5px);
+  transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
+}
 
-    /* Noise layer styling */
-    #noiseCanvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 4;
-      pointer-events: none;
-    }
+.rotating-image:hover {
+  opacity: 1;
+  filter: blur(0px);
+  transform: scale(1.5);
+}
 
-    /* Overlay image styling */
-    #overlay-image {
-      position: absolute;
-      top: 50%;           
-      left: 50%;          
-      width: auto;       
-      height: auto;       
-      max-width: 100vw;    
-      max-height: 100vh;   
-      transform: translate(-50%, -50%);  
-      z-index: 6;        
-      pointer-events: none;  
-      opacity: 80%;
-      mix-blend-mode: difference;
-      filter: blur(2px);  
-    }
+/* Noise layer styling */
+#noiseCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+}
 
-    /* Back Button */
-    #backButton {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      z-index: 8;
-      padding: 10px;
-      background: none;
-      color: #FFFFFF; /* Text color changed to white */
-      border: none;
-      cursor: pointer;
-      font-size: 24px;
-      font-family: bianzhidai-Base;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Add shadow to text */
-    }
+/* Overlay image styling */
+#overlay-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: auto;
+  max-width: 100vw;
+  max-height: 100vh;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  pointer-events: none;
+  opacity: 80%;
+  mix-blend-mode: difference;
+  filter: blur(2px);
+}
+
+/* Back Button */
+#backButton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 8;
+  padding: 10px;
+  background: none;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  font-family: bianzhidai-Base;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
   </style>
 </head>
 <body>
