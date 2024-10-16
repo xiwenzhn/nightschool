@@ -172,29 +172,53 @@
       z-index: 20; 
     }
 
-    /* Overlay image styling */
-    #overlay-image {
-      position: fixed;
-      top: 50%;           
-      right: 18px;        
-      width: 200px;       
-      height: 200px;      
-      transform: translateY(-50%);
-      z-index: 9;         
-      pointer-events: none; 
-      filter: blur(0.4px);  
-      opacity: 100%;
-    }
-
-    #yellow-block {
+    /* Clock and Overlay Container Styling */
+    #clock-overlay-container {
       position: fixed;
       top: 50%;
       right: 18px;
       width: 200px;
       height: 200px;
       transform: translateY(-50%);
-      background-color: yellow;
+      z-index: 9;
+      pointer-events: none;
+    }
+
+    /* Overlay image styling */
+    #overlay-image {
+      width: 100%;
+      height: 100%;
+      filter: blur(0.4px);  
+      opacity: 100%;
+    }
+
+    /* Clock Arm Styling */
+    #clock-hand {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform-origin: center;
       z-index: 10;
+      cursor: pointer;
+    }
+
+    #clock-hand line {
+      stroke: #FFFFC5;
+      stroke-width: 4;
+      transition: stroke 0.3s ease;
+    }
+
+    /* Yellow block for hover effect */
+    #yellow-block {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: yellow;
+      z-index: 5;
       pointer-events: none;
       opacity: 0;
       transition: opacity 0.1s ease;
@@ -206,6 +230,7 @@
       filter: blur(5px); /* Display yellow block with some transparency when hovered */
     }
 
+    /* Overlay image 2 styling */
     #overlay-image-2 {
       position: absolute;
       top: 50%;           
@@ -218,26 +243,6 @@
       z-index: 7;         
       pointer-events: none; 
       mix-blend-mode: difference;
-    }
-
-    /* Clock Arm Styling */
-    #clock-hand {
-      position: fixed;
-      top: 50%;
-      right: 10px;
-      width: 200px;
-      height: 200px;
-      transform-origin: 50% 50%;
-      transform: translateY(-50%);
-      z-index: 8;
-      cursor: pointer;
-      mix-blend-mode: difference;
-    }
-
-    #clock-hand line {
-      stroke: #FFFFC5;
-      stroke-width: 4;
-      transition: stroke 0.3s ease;
     }
 
     /* Responsive Styling */
@@ -261,29 +266,28 @@
         width: 100%; /* Expand the dropdown menu to the width of the screen */
       }
 
-      #clock-hand {
-        top: 50%;
-        left: 155px;
-        right: auto;
-      }
-
-      #yellow-block {
+      #clock-overlay-container {
         top: 50%;
         left: 50%;
         right: auto;
         transform: translate(-50%, -50%);
         width: 100px;
-        height: 100px;
-        display: none; /* Hide yellow block hover effect in mobile view */
+        height: 100px; /* Adjust size for mobile */
       }
 
       #overlay-image {
-        top: 50%;
-        left: 50%;
-        right: auto;
-        transform: translate(-50%, -50%);
-        width: 100px;  /* Make the overlay smaller */
-        height: 100px;
+        width: 100%;  /* Match size to container */
+        height: 100%;
+      }
+
+      #clock-hand {
+        width: 100%;
+        height: 100%; /* Match size to container */
+      }
+
+      #yellow-block {
+        width: 100%;
+        height: 100%; /* Match size to container */
       }
     }
   </style>
@@ -302,14 +306,12 @@
   </div>
   <ul id="nav-menu" class="desktop-menu">
     <li id="nav-menu-item-about"><a href="file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/nightschool%20info.html">About</a></li> 
-    <li id="nav-menu-item-contact"><a href="contact.html">Contact</a></li>
     <li id="nav-menu-item-reading-lists"><a href="readinglist.html">Reading List</a></li>
     <li id="nav-menu-item-sessions"><a href="file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/Sessions.html">Sessions</a></li>
     <li id="nav-menu-item-acknowledgements"><a href="file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/acknowledgement.html">Acknowledgements</a></li> 
   </ul>
   <ul id="mobile-menu" class="mobile-menu">
     <li id="nav-menu-item-about-mobile"><a href="about.html">About</a></li> 
-    <li id="nav-menu-item-contact-mobile"><a href="contact.html">Contact</a></li>
     <li id="nav-menu-item-reading-lists-mobile"><a href="readinglist.html">Reading List</a></li>
     <li id="nav-menu-item-sessions-mobile"><a href="file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/nightschool%20info.html">Sessions</a></li>
     <li id="nav-menu-item-acknowledgements-mobile"><a href="acknowledgements.html">Acknowledgements</a></li> 
@@ -334,17 +336,21 @@
   </div>
 </div>
 
-<!-- Overlay Images -->
-<svg id="clock-hand" width="200" height="200">
-  <line x1="100" y1="100" x2="100" y2="10" />
-</svg>
-<div id="yellow-block"></div>
-<img id="overlay-image" src="https://i.postimg.cc/ZK0CjvDT/Night-school.png" alt="Overlay Image">
+<!-- Clock and Overlay Container -->
+<div id="clock-overlay-container">
+  <img id="overlay-image" src="https://i.postimg.cc/ZK0CjvDT/Night-school.png" alt="Overlay Image">
+  <svg id="clock-hand" viewBox="0 0 200 200">
+    <line x1="100" y1="100" x2="100" y2="10" />
+  </svg>
+  <div id="yellow-block"></div>
+</div>
+
 <img id="overlay-image-2" src="https://i.postimg.cc/X7X0tfbz/Night-school-identity.png" alt="Overlay Image 2">
 
 <script>
   const imageItems = document.querySelectorAll("#image-cluster img");
   const clockHand = document.getElementById('clock-hand');
+  const yellowBlock = document.getElementById('yellow-block');
   const hamburgerMenu = document.getElementById('hamburger-menu');
   const mobileMenu = document.getElementById('mobile-menu');
   let isPaused = false;
@@ -367,6 +373,8 @@
   let currentImageIndex = 0;
 
   function morphBackgroundImages() {
+    if (isPaused) return;
+
     currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
     document.getElementById('background').style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
   }
@@ -385,10 +393,12 @@
   function rotateClockHand() {
     if (isPaused) return;
 
-    clockHand.style.transform = `translateY(-50%) rotate(${Date.now() % 60000 / 60000 * 360}deg)`;
+    clockHand.style.transform = `rotate(${Date.now() % 60000 / 60000 * 360}deg)`;
   }
 
   function applyPixelation() {
+    if (isPaused) return;
+
     const pixelSize = Math.floor(Math.random() * 20) + 5;
     document.getElementById('background').style.filter = `blur(${pixelSize}px) contrast(1000%) grayscale(100%) invert(100%)`;
   }
@@ -423,27 +433,19 @@
 
   function animateItems() {
     setInterval(() => {
-      if (!isPaused) {
-        trembleImageItems(); // Apply trembling effect to image cluster
-      }
+      trembleImageItems();
     }, 100); // Slight trembling movement for images
 
     setInterval(() => {
-      if (!isPaused) {
-        rotateClockHand(); // Rotate the clock hand once per second
-      }
+      rotateClockHand(); // Rotate the clock hand once per second
     }, 1000); // Increment clock every second
 
     setInterval(() => {
-      if (!isPaused) {
-        applyPixelation();
-      }
+      applyPixelation();
     }, 100);
 
     setInterval(() => {
-      if (!isPaused) {
-        morphBackgroundImages();
-      }
+      morphBackgroundImages();
     }, 3000);
   }
 
