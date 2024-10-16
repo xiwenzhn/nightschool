@@ -5,18 +5,19 @@
   <title>NightSchool Overview</title>
   <style>
     @font-face {
-  font-family: 'bianzhidai-Base';
-  src: url('bianzhidai-Base.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
+      font-family: 'bianzhidai-Base';
+      src: url('bianzhidai-Base.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
 
-@font-face {
-  font-family: 'CirrusCumulus';
-  src: url('fonts/CirrusCumulus.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+    @font-face {
+      font-family: 'CirrusCumulus';
+      src: url('fonts/CirrusCumulus.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     * {
       box-sizing: border-box;
       font-family: CirrusCumulus;
@@ -60,10 +61,20 @@
       padding: 20px;
       font-size: 1.2em;
       line-height: 1.6em;
-      color: lightyellow; /* Text color changed to white */
+      color: lightyellow;
       overflow-y: auto;
       column-count: 2;
-      column-gap: 400px; /* Leave space for rotating images */
+      column-gap: 400px;
+    }
+
+    /* Media query for mobile layout */
+    @media screen and (max-width: 768px) {
+      .content {
+        column-count: 1;
+        column-gap: 0;
+        padding: 20px;
+        font-size: 1.1em;
+      }
     }
 
     p {
@@ -73,7 +84,7 @@
 
     h1 {
       font-size: 2em;
-      color: #FFFFFF; /* Text color changed to white */
+      color: #FFFFFF;
       text-align: center;
       margin-bottom: 20px;
       font-family: bianzhidai-Base;
@@ -92,8 +103,8 @@
 
     .rotating-image:hover {
       opacity: 1;
-      filter: blur(0px); /* Remove blur when hovering */
-      transform: scale(1.5); /* Enlarge image on hover */
+      filter: blur(0px);
+      transform: scale(1.5);
     }
 
     /* Noise layer styling */
@@ -110,18 +121,18 @@
     /* Overlay image styling */
     #overlay-image {
       position: absolute;
-      top: 50%;           
-      left: 50%;          
-      width: auto;       
-      height: auto;       
-      max-width: 100vw;    
-      max-height: 100vh;   
-      transform: translate(-50%, -50%);  
-      z-index: 6;        
-      pointer-events: none;  
+      top: 50%;
+      left: 50%;
+      width: auto;
+      height: auto;
+      max-width: 100vw;
+      max-height: 100vh;
+      transform: translate(-50%, -50%);
+      z-index: 6;
+      pointer-events: none;
       opacity: 80%;
       mix-blend-mode: difference;
-      filter: blur(2px);  
+      filter: blur(2px);
     }
 
     /* Back Button */
@@ -132,12 +143,12 @@
       z-index: 8;
       padding: 10px;
       background: none;
-      color: #FFFFFF; /* Text color changed to white */
+      color: #FFFFFF;
       border: none;
       cursor: pointer;
       font-size: 24px;
       font-family: bianzhidai-Base;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Add shadow to text */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
   </style>
 </head>
@@ -209,13 +220,13 @@
     rotatingImages.forEach((img, index) => {
       // Creating a random speed modifier for each image to make movement organic
       const speedModifier = 0.5 + Math.random();
-      const angleOffset = (scrollPos / 100) * speedModifier; // Adjust rotation speed for each image
-      const angle = angleOffset + index * (Math.PI / 2.5) + Math.sin(scrollPos / 50); // Adding sin for wobble effect
+      const angleOffset = (scrollPos / 100) * speedModifier;
+      const angle = angleOffset + index * (Math.PI / 2.5) + Math.sin(scrollPos / 50);
 
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
-      const x = centerX + radiusX * Math.cos(angle) - img.width / 2 + Math.sin(angle * 1.5) * 20; // Adding randomness to position
-      const y = centerY + radiusY * Math.sin(angle) - img.height / 2 + Math.cos(angle * 1.5) * 15; // Adding randomness to position
+      const x = centerX + radiusX * Math.cos(angle) - img.width / 2 + Math.sin(angle * 1.5) * 20;
+      const y = centerY + radiusY * Math.sin(angle) - img.height / 2 + Math.cos(angle * 1.5) * 15;
 
       img.style.transform = `translate(${x}px, ${y}px)`;
     });
@@ -226,4 +237,3 @@
 
 </body>
 </html>
-
