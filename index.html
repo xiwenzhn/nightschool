@@ -7,8 +7,8 @@
     @font-face {
   font-family: 'bianzhidai-Bubble';
   src: url('bianzhidai-Bubble.otf') format('opentype');
- /* font-weight: normal;
-  font-style: normal;*/
+  /* font-weight: normal;
+  font-style: normal; */
 }
     * {
       box-sizing: border-box;
@@ -120,13 +120,15 @@
       gap: 15px;
       padding: 50px 20px;
       z-index: 50; /* Ensure the dropdown is below the hamburger icon */
+
     }
 
     nav ul.mobile-menu li {
-      font-size: 24px !important; /* Explicitly set the font size to ensure it overrides previous styles */
       color: black !important; /* Black text to enhance contrast */
       text-align: center;
       opacity: 1;
+ 
+       
     }
 
     /* Noise layer styling */
@@ -253,9 +255,15 @@
 
     /* Responsive Styling */
     @media screen and (max-width: 768px) {
+      * {
+        font-size: 15px;
+        filter: none;
+      }
       nav {
         mix-blend-mode: unset; /* Override mix-blend-mode for the entire nav on mobile view */
         z-index: 900; /* Keep nav below hamburger menu */
+
+
       }
 
       .hamburger-menu {
@@ -270,6 +278,8 @@
       nav ul.mobile-menu {
         display: none; /* Ensure menu is initially hidden */
         width: 100%; /* Expand the dropdown menu to the width of the screen */
+       
+
       }
 
       #clock-overlay-container {
