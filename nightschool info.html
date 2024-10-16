@@ -4,9 +4,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NightSchool Overview</title>
   <style>
+    @font-face {
+  font-family: 'bianzhidai-Base';
+  src: url('bianzhidai-Base.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CirrusCumulus';
+  src: url('fonts/CirrusCumulus.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
     * {
       box-sizing: border-box;
-      font-family: bianzhidai-Base;
+      font-family: CirrusCumulus;
       word-break: keep-all;
       font-size: 12pt;
       padding: 0;
@@ -47,7 +60,7 @@
       padding: 20px;
       font-size: 1.2em;
       line-height: 1.6em;
-      color: #FFFFFF; /* Text color changed to white */
+      color: lightyellow; /* Text color changed to white */
       overflow-y: auto;
       column-count: 2;
       column-gap: 400px; /* Leave space for rotating images */
@@ -156,7 +169,7 @@
 <img class="rotating-image" id="image5" src="https://i-n-g-a.com/cdn/shop/products/IMG_8421_1000x.jpg?v=1623409669" alt="Image 5">
 
 <!-- Overlay Image -->
-<img id="overlay-image" src="file:///Users/xiwenzhang/Desktop/Work/Yale/Fall%202024/Nightschool/nightschool/Night_school.png" alt="Overlay Image">
+<img id="overlay-image" src="https://i.postimg.cc/ZK0CjvDT/Night-school.png" alt="Overlay Image">
 
 <script>
   // Adding noise canvas
@@ -213,3 +226,4 @@
 
 </body>
 </html>
+
