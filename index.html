@@ -4,19 +4,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NightSchool</title>
   <style>
-   @font-face {
-      font-family: 'bianzhidai-Base';
-      src: url('bianzhidai-Base.otf') format('opentype');
-      font-weight: normal;
-      font-style: normal;
-    }
-
     @font-face {
-      font-family: 'CirrusCumulus';
-      src: url('CirrusCumulus.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-    }
+  font-family: 'bianzhidai-Bubble';
+  src: url('bianzhidai-Bubble.otf') format('opentype');
+  /* font-weight: normal;
+  font-style: normal; */
+}
+@font-face {
+  font-family: 'CirrusCumulus';
+  src: url('fonts/CirrusCumulus.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
     * {
       box-sizing: border-box;
       font-family: bianzhidai-Bubble;
@@ -195,13 +194,14 @@
       transform: translateY(-50%);
       z-index: 9;
       cursor: pointer;
+      mix-blend-mode: difference; /* Apply the difference blend mode */
     }
 
     /* Overlay image styling */
     #overlay-image {
       width: 100%;
       height: 100%;
-      filter: blur(0.4px);  
+      filter: blur(0.3px);  
       opacity: 100%;
     }
 
@@ -222,25 +222,26 @@
       transition: stroke 0.3s ease;
     }
 
-    /* Yellow block for hover effect */
-    #yellow-block {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: yellow;
-      z-index: 5;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.1s ease;
-      mix-blend-mode: difference;
-    }
+   /* Yellow block for hover effect */
+#yellow-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: yellow;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.1s ease, filter 0.3s ease;
 
-    #clock-hand:hover + #yellow-block {
-      opacity: 0.8;
-      filter: blur(5px); /* Display yellow block with some transparency when hovered */
-    }
+}
+
+#clock-hand:hover + #yellow-block {
+  opacity: 0.8; /* Increase opacity on hover */
+  filter: blur(3px); /* Adding blur to create a more pronounced difference effect */
+ 
+}
 
     /* Overlay image 2 styling */
     #overlay-image-2 {
