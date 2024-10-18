@@ -4,24 +4,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sessions</title>
   <style>
-   @font-face {
-      font-family: 'bianzhidai-Base';
-      src: url('bianzhidai-Base.otf') format('opentype');
-      font-weight: normal;
-      font-style: normal;
-    }
+@font-face {
+  font-family: 'bianzhidai-Base';
+  src: url('fonts/bianzhidai-Base.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
 
-    @font-face {
-      font-family: 'CirrusCumulus';
-      src: url('CirrusCumulus.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-    }
+@font-face {
+  font-family: 'CirrusCumulus';
+  src: url('fonts/CirrusCumulus.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   box-sizing: border-box;
   font-family: CirrusCumulus;
   word-break: keep-all;
-  font-size: 12pt;
   padding: 0;
   margin: 0;
   list-style-type: none;
@@ -34,6 +34,8 @@ body {
   overflow: hidden;
   background-color: black;
   position: relative;
+  font-size: 19px;
+
 }
 
 /* Background container */
@@ -47,32 +49,29 @@ body {
   z-index: 1;
   filter: grayscale(100%) contrast(150%);
   transition: background-image 1s ease-in-out;
+
 }
 
 /* Content container */
 .content {
   position: absolute;
   z-index: 2;
-  top: 15%;
-  left: 10%;
-  right: 10%;
-  bottom: 15%;
+  top: 10%;
+  left: 30%;  /* Increased left margin */
+  right: 30%;  /* Increased right margin */
+  bottom: 10%;
   padding: 20px;
   font-size: 1.2em;
   line-height: 1.6em;
   color: lightyellow;
   overflow-y: auto;
-  column-count: 2;
-  column-gap: 400px;
+  -webkit-overflow-scrolling: touch; /* Enables smooth scrolling */
+  overflow-y: scroll; /* Ensure the content is scrollable */
+  scrollbar-width: none; /* Firefox */
 }
-
 /* Mobile responsive layout */
 @media screen and (max-width: 768px) {
   .content {
-    column-count: 1; /* Change to single column for mobile */
-    column-gap: 0;
-    top: 10%;
-    bottom: 10%;
     padding: 10px;
     font-size: 1.1em;
   }
@@ -166,23 +165,20 @@ h1 {
 
 <!-- Content Area -->
 <div class="content" id="text-content">
-  WORKSHOP A 
-    <p>Title workshop: Bent Scissors, Bottom Spout: Edge-work Icons with the Krüppel Zeitung</p>
+   Bent Scissors, Bottom Spout: Edge-work Icons with the Krüppel Zeitung</p>
     <p>Facilitators: Ren Loren Britton (they/them)</p>
     <p>A pair of scissors with bent ends: not straight, not sharp; a double ended trumpet: buttons in the middle, horns on both sides; a watering can with a spout at the bottom of the drum: as soon as water is poured in, it is directly emptied out. The Krüppel Zeitung [Crip Magazine] was an anti-assimilationist queer crip magazine coming out of Bremen, Germany in the late 70’s and early 80’s: in this magazine icons repeat and hold space for non-verbal articulations of their critical politics. Towards developing practices of nonverbal expression that hold values of our practice, participants in this workshop will engage with the edge-work of their practices to develop icons that hold space for iconic-non-verbal worlding.</p>
-    
-  WORKSHOP B 
-    <p>Projects x Platforms: Circulation in the World(s) We Want</p>
+<br><br>
+   Projects x Platforms: Circulation in the World(s) We Want
     <p>Facilitator: Caroline Woolard</p>
     <p>In this workshop, participants will work together to identify the ways that discrete projects – a poster, a poem, or a pair of pants – can circulate in the world through platforms that they co-create. Participants will learn about the practices of artists, designers, and culture-bearers who are making projects and platforms in the solidarity economy movement. The solidarity economy movement connects hyperlocal and cross-sector economic justice initiatives such as cooperatives, land trusts, timebanks, mutual aid networks, open source software, and other initiatives that center community ownership and democratic governance.</p>
-  
-   WORKSHOP C
-    <p>Living Samples</p>
+  <br><br>
+      Living Samples
     <p>Facilitators: Randi Shandroski, Florencia Escudero</p>
     <p>Students will translate their icon into a wearable poster using precut white oxford fabric that will be provided. Randi and Flo will present a 20 min slideshow with examples of their collaboration and inspirations for this assignment. Randi and Flo will construct a garment that functions like a wearable binder/sample book in which the student’s pages will clip into via grommets.</p>
     
-  WORKSHOP D
-    <p> Design as Content: Ouroboros Icon/Magazine Review</p>
+    <br><br>
+   Design as Content: Ouroboros Icon/Magazine Review
     <p>Facilitators: Kellie Konapelsky (primary) & Gaby Collins-Fernandez</p>
     <p>Group critique and review of students progress of their icon along with an overview of the creative direction for the magazine. Using this time to have group discussions of our path forward for the magazine issue and the students’ design contributions.</p>
   </div>

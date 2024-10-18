@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NightSchool Overview</title>
   <style>
-   @font-face {
+    @font-face {
       font-family: 'bianzhidai-Base';
       src: url('bianzhidai-Base.otf') format('opentype');
       font-weight: normal;
@@ -13,16 +13,16 @@
 
     @font-face {
       font-family: 'CirrusCumulus';
-      src: url('CirrusCumulus.ttf') format('truetype');
+      src: url('fonts/CirrusCumulus.ttf') format('truetype');
       font-weight: normal;
       font-style: normal;
     }
 
     * {
+      font-size: 20px;
       box-sizing: border-box;
       font-family: CirrusCumulus;
-      word-break: keep-all;
-      font-size: 12pt;
+      word-break: keep-all; 
       padding: 0;
       margin: 0;
       list-style-type: none;
@@ -52,30 +52,21 @@
 
     /* Content container */
     .content {
-      position: absolute;
-      z-index: 2;
-      top: 15%;
-      left: 10%;
-      right: 10%;
-      bottom: 15%;
-      padding: 20px;
-      font-size: 1.2em;
-      line-height: 1.6em;
-      color: lightyellow;
-      overflow-y: auto;
-      column-count: 2;
-      column-gap: 400px;
-    }
-
-    /* Media query for mobile layout */
-    @media screen and (max-width: 768px) {
-      .content {
-        column-count: 1;
-        column-gap: 0;
-        padding: 20px;
-        font-size: 1.1em;
-      }
-    }
+  
+  position: absolute;
+  z-index: 2;
+  top: 10%;
+  left: 30%;  /* Increased left margin */
+  right: 30%;  /* Increased right margin */
+  bottom: 10%;
+  padding: 20px;
+  line-height: 1.6em;
+  color: lightyellow;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Enables smooth scrolling */
+  overflow-y: scroll; /* Ensure the content is scrollable */
+  scrollbar-width: none; /* Firefox */
+}
 
     p {
       text-indent: 30px;
@@ -218,7 +209,6 @@
     const scrollPos = textContent.scrollTop;
     
     rotatingImages.forEach((img, index) => {
-      // Creating a random speed modifier for each image to make movement organic
       const speedModifier = 0.5 + Math.random();
       const angleOffset = (scrollPos / 100) * speedModifier;
       const angle = angleOffset + index * (Math.PI / 2.5) + Math.sin(scrollPos / 50);
@@ -237,3 +227,4 @@
 
 </body>
 </html>
+
