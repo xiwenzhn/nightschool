@@ -5,17 +5,17 @@
   <title>NightSchool</title>
   <style>
     @font-face {
-  font-family: 'bianzhidai-Bubble';
-  src: url('bianzhidai-Bubble.otf') format('opentype');
-  /* font-weight: normal;
-  font-style: normal; */
-}
-@font-face {
-  font-family: 'CirrusCumulus';
-  src: url('fonts/CirrusCumulus.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+      font-family: 'bianzhidai-Bubble';
+      src: url('bianzhidai-Bubble.otf') format('opentype');
+    }
+
+    @font-face {
+      font-family: 'CirrusCumulus';
+      src: url('fonts/CirrusCumulus.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     * {
       box-sizing: border-box;
       font-family: bianzhidai-Bubble;
@@ -25,6 +25,7 @@
       margin: 0;
       list-style-type: none;
       touch-action: manipulation;
+      
     }
 
     body {
@@ -55,61 +56,53 @@
       top: 10px;
       left: 0;
       right: 0;
-      z-index: 2;
+      z-index: 100;
       padding: 0 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      mix-blend-mode: difference;
+      mix-blend-mode: difference; 
     }
 
     .hamburger-menu {
-      display: none;
+      display: flex;
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
       margin-right: 20px;
-      z-index: 1000; /* Keep hamburger menu on top */
-      mix-blend-mode: unset; /* Make sure the color is not affected by blend mode */
+      z-index: 101;
+      mix-blend-mode: difference; 
     }
 
     .hamburger-menu div {
       width: 30px;
       height: 4px;
-      background-color: black; /* Keep hamburger icon black */
+      background-color: lightyellow;
     }
 
-    nav ul {
-      display: flex;
+    nav ul.desktop-menu {
+      display: none;
       justify-content: space-around;
       align-items: center;
       flex-grow: 1;
       list-style: none;
       margin: 0;
       padding: 0;
-      transition: filter 0.5s ease, opacity 0.5s ease;
+      flex-direction: row;
+      z-index: 102;
     }
 
-    nav ul li {
+    nav ul.desktop-menu li {
       font-size: 1.2em;
-      color: #FFFFC5;
-      transition: filter 0.5s ease, opacity 0.5s ease;
-      filter: blur(1px);
-      opacity: 0.3;
-    }
-
-    nav ul li:hover {
-      filter: blur(0);
-      opacity: 1;
+      color: lightyellow;
+      
     }
 
     a {
       color: inherit;
       text-decoration: none;
-    }
+     
 
-    a:hover {
-      text-decoration: underline;
     }
 
     /* Mobile Menu Styling */
@@ -121,17 +114,17 @@
       right: 0;
       width: 100vw;
       height: 100vh;
-      background-color: rgba(255, 255, 255, 1); /* Opaque white background */
+      background-color: rgba(255, 255, 255, 1);
       flex-direction: column;
       gap: 15px;
       padding: 50px 20px;
-      z-index: 50; /* Ensure the dropdown is below the hamburger icon */
+      z-index: 50;
+      mix-blend-mode: difference; /* Apply blending mode to mobile menu */
     }
 
     nav ul.mobile-menu li {
-      color: black !important; /* Black text to enhance contrast */
+      color: black;
       text-align: center;
-      opacity: 1;
       text-decoration: underline;
     }
 
@@ -142,8 +135,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 3;  
-      pointer-events: none;  
+      z-index: 3;
+      pointer-events: none;
     }
 
     /* Cluster of images positioned in an "L" shape in the bottom-left corner */
@@ -172,19 +165,17 @@
     #image-cluster img {
       width: 100px;
       height: 100px;
-      transition: transform 0.5s ease, filter 0.5s ease; 
+      transition: transform 0.5s ease, filter 0.5s ease;
       filter: blur(10px);
       z-index: 11;
     }
 
-    /* Hover states */
     #image-cluster img:hover {
-      transform: scale(5);  
-      filter: blur(0px);  
-      z-index: 20; 
+      transform: scale(5);
+      filter: blur(0px);
+      z-index: 20;
     }
 
-    /* Clock and Overlay Container Styling */
     #clock-overlay-container {
       position: fixed;
       top: 50%;
@@ -194,18 +185,16 @@
       transform: translateY(-50%);
       z-index: 9;
       cursor: pointer;
-      mix-blend-mode: difference; /* Apply the difference blend mode */
+      mix-blend-mode: difference;
     }
 
-    /* Overlay image styling */
     #overlay-image {
       width: 100%;
       height: 100%;
-      filter: blur(0.3px);  
+      filter: blur(0.3px);
       opacity: 100%;
     }
 
-    /* Clock Arm Styling */
     #clock-hand {
       position: absolute;
       top: 0;
@@ -222,57 +211,51 @@
       transition: stroke 0.3s ease;
     }
 
-   /* Yellow block for hover effect */
-#yellow-block {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: yellow;
-  z-index: 5;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.1s ease, filter 0.3s ease;
+    #yellow-block {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: yellow;
+      z-index: 5;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.1s ease, filter 0.3s ease;
+    }
 
-}
+    #clock-hand:hover + #yellow-block {
+      opacity: 0.8;
+      filter: blur(3px);
+    }
 
-#clock-hand:hover + #yellow-block {
-  opacity: 0.8; /* Increase opacity on hover */
-  filter: blur(3px); /* Adding blur to create a more pronounced difference effect */
- 
-}
-
-    /* Overlay image 2 styling */
     #overlay-image-2 {
       position: absolute;
-      top: 50%;           
-      left: 50%;          
-      width: auto;       
-      height: auto;       
-      max-width: 100vw;    
-      max-height: 100vh;   
-      transform: translate(-50%, -50%);  
-      z-index: 7;         
-      pointer-events: none; 
+      top: 50%;
+      left: 50%;
+      width: auto;
+      height: auto;
+      max-width: 100vw;
+      max-height: 100vh;
+      transform: translate(-50%, -50%);
+      z-index: 7;
+      pointer-events: none;
       mix-blend-mode: difference;
     }
 
-    /* Responsive Styling */
     @media screen and (max-width: 768px) {
       * {
         font-family: 'CirrusCumulus';
         font-size: 22px;
-    
       }
+
       nav {
-        mix-blend-mode: unset; /* Override mix-blend-mode for the entire nav on mobile view */
-        z-index: 900; /* Keep nav below hamburger menu */
+        z-index: 900;
       }
 
       .hamburger-menu {
         display: flex;
-        z-index: 1000; /* Make sure hamburger menu is above the mobile menu */
+        z-index: 1000;
       }
 
       nav ul.desktop-menu {
@@ -280,8 +263,8 @@
       }
 
       nav ul.mobile-menu {
-        display: none; /* Ensure menu is initially hidden */
-        width: 100%; /* Expand the dropdown menu to the width of the screen */
+        display: none;
+        width: 100%;
       }
 
       nav ul.mobile-menu li {
@@ -296,22 +279,22 @@
         right: auto;
         transform: translate(-50%, -50%);
         width: 100px;
-        height: 100px; /* Adjust size for mobile */
+        height: 100px;
       }
 
       #overlay-image {
-        width: 100%;  /* Match size to container */
+        width: 100%;
         height: 100%;
       }
 
       #clock-hand {
         width: 100%;
-        height: 100%; /* Match size to container */
+        height: 100%;
       }
 
       #yellow-block {
         width: 100%;
-        height: 100%; /* Match size to container */
+        height: 100%;
       }
     }
   </style>
@@ -329,16 +312,14 @@
     <div></div>
   </div>
   <ul id="nav-menu" class="desktop-menu">
-    <li id="nav-menu-item-about"><a href="nightschool info.html">About</a></li> 
-    <li id="nav-menu-item-reading-lists"><a href="Reading List.html">Reading List</a></li>
+    <li id="nav-menu-item-about"><a href="nightschool info.html">About</a></li>
     <li id="nav-menu-item-sessions"><a href="Sessions.html">Sessions</a></li>
-    <li id="nav-menu-item-acknowledgements"><a href="acknowledgement.html">Acknowledgements</a></li> 
+    <li id="nav-menu-item-acknowledgements"><a href="acknowledgement.html">Acknowledgements</a></li>
   </ul>
   <ul id="mobile-menu" class="mobile-menu">
-    <li id="nav-menu-item-about-mobile"><a href="nightschool info.html">About</a></li> 
-    <li id="nav-menu-item-reading-lists-mobile"><a href="Reading List.html">Reading List</a></li>
+    <li id="nav-menu-item-about-mobile"><a href="nightschool info.html">About</a></li>
     <li id="nav-menu-item-sessions-mobile"><a href="Sessions.html">Sessions</a></li>
-    <li id="nav-menu-item-acknowledgements-mobile"><a href="acknowledgement.html">Acknowledgements</a></li> 
+    <li id="nav-menu-item-acknowledgements-mobile"><a href="acknowledgement.html">Acknowledgements</a></li>
   </ul>
 </nav>
 
@@ -347,16 +328,13 @@
 
 <!-- Cluster of images -->
 <div id="image-cluster">
-  <!-- Vertical part of the L shape -->
   <div class="vertical">
     <img src="https://i.postimg.cc/1zSMW850/temp-Image0-Uw5d-X.avif" alt="Image 4">
     <img src="https://i.postimg.cc/26zc5Vsj/temp-Image4k-VTN9.avif" alt="Image 5">
   </div>
-  <!-- Horizontal part of the L shape -->
   <div class="horizontal">
-
-    <img src="https://i.postimg.cc/4y0Bwwmn/temp-Image-SYzv-JW.avif" alt="Image 7"> <!-- Image 7 -->
-    <img src="https://i.postimg.cc/gJNMLGpV/temp-Imagef0-N1u-K.avif" alt="Image 2"> <!-- Image 2 -->
+    <img src="https://i.postimg.cc/4y0Bwwmn/temp-Image-SYzv-JW.avif" alt="Image 7">
+    <img src="https://i.postimg.cc/gJNMLGpV/temp-Imagef0-N1u-K.avif" alt="Image 2">
     <img src="https://i.postimg.cc/CMctzsM3/temp-Imagec-UX5cq.avif" alt="Image 1">
     <img src="https://i.postimg.cc/0jjVph5L/temp-Image-GIb-F8v.avif" alt="Image 3">
     <img src="https://i.postimg.cc/mgC8NYR2/temp-Imageo-Jd07-X.avif" alt="Image 6">
@@ -379,6 +357,7 @@
   const clockHand = document.getElementById('clock-hand');
   const yellowBlock = document.getElementById('yellow-block');
   const hamburgerMenu = document.getElementById('hamburger-menu');
+  const navMenu = document.querySelector('.desktop-menu');
   const mobileMenu = document.getElementById('mobile-menu');
   const clockOverlayContainer = document.getElementById('clock-overlay-container');
   let isPaused = false;
@@ -390,43 +369,33 @@
     'https://freight.cargo.site/w/1500/q/75/i/52af4e9847e7ee7fd64799a9e74a06ade27084f61c0b1bc2e6b4c7b12995a375/PRECOG_V8_COVER.jpg',
     'https://freight.cargo.site/w/1400/q/75/i/2869c992d39f380cacecfed96b0001461e37e9f7baaf3ae8d0208e9ccb3ad24e/Mag_Vol2.jpg',
     'https://freight.cargo.site/w/1400/q/75/i/75df32cdae8f0c000763d397e0dfbfdd9a4fda288e8d64354d29443cd2690952/PRECOG_V5_COVER.jpg',
-    'https://freight.cargo.site/w/1400/q/75/i/137b2aad78332eaf89e7b3becee6572811f4600300bf3f913f3e0cb9c5db106e/Mag_Vol1.jpg',
-    'https://freight.cargo.site/w/1400/q/75/i/bbbcadccd9949b0edb744542b03c4b05a2020d5d26e493f8b62af459da57fcdb/PRECOG_V3_WEB.jpg', 
-    'https://freight.cargo.site/w/1200/q/94/i/0f2537e323f027f1a75063d7f7bd89fd2593336b4ba0ab7bd3992a5f3d2cf772/04_-EverChangingFacade_2020.jpg',
-    'https://freight.cargo.site/w/1200/q/94/i/f21c4b47da8af544bf80fbe48549944672ce11be3e5f960621ed15534681c5/03_AllStandPointsArePartial_2020.jpg',
-    'https://freight.cargo.site/w/1200/q/94/i/b2551ebc26eb5b767bb2a37d79b6d1dcc6cb119af53e4720668dd9ebf14332fb/05_LurkingVariable_2020.jpg',
-    'https://freight.cargo.site/w/300/q/75/i/0a6fb2cd1687556129d50a723c10881b85fd740411759849d86304b9d1200132/PRECOG_LOGO.jpg'
+    'https://freight.cargo.site/w/1400/q/75/i/137b2aad78332eaf89e7b3becee6572811f4600300bf3f913f3e0cb9c5db106e/Mag_Vol1.jpg'
   ];
 
   let currentImageIndex = 0;
 
   function morphBackgroundImages() {
     if (isPaused) return;
-
     currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
     document.getElementById('background').style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
   }
 
-  // Trembling effect for the image cluster
   function trembleImageItems() {
     if (isPaused) return;
-
     imageItems.forEach((item) => {
-      const randomX = Math.random() * 2 - 1; // Random movement between -1px to 1px
-      const randomY = Math.random() * 2 - 1; // Random movement between -1px to 1px
+      const randomX = Math.random() * 2 - 1;
+      const randomY = Math.random() * 2 - 1;
       item.style.transform = `translate(${randomX}px, ${randomY}px)`;
     });
   }
 
   function rotateClockHand() {
     if (isPaused) return;
-
     clockHand.style.transform = `rotate(${Date.now() % 60000 / 60000 * 360}deg)`;
   }
 
   function applyPixelation() {
     if (isPaused) return;
-
     const pixelSize = Math.floor(Math.random() * 20) + 5;
     document.getElementById('background').style.filter = `blur(${pixelSize}px) contrast(1000%) grayscale(100%) invert(100%)`;
   }
@@ -434,7 +403,6 @@
   function applyNoise() {
     const canvas = document.getElementById("noiseCanvas");
     const ctx = canvas.getContext("2d");
-
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
@@ -460,34 +428,21 @@
   }
 
   function animateItems() {
-    setInterval(() => {
-      trembleImageItems();
-    }, 100); // Slight trembling movement for images
-
-    setInterval(() => {
-      rotateClockHand(); // Rotate the clock hand once per second
-    }, 1000); // Increment clock every second
-
-    setInterval(() => {
-      applyPixelation();
-    }, 100);
-
-    setInterval(() => {
-      morphBackgroundImages();
-    }, 3000);
+    setInterval(() => trembleImageItems(), 100);
+    setInterval(() => rotateClockHand(), 1000);
+    setInterval(() => applyPixelation(), 100);
+    setInterval(() => morphBackgroundImages(), 3000);
   }
 
-  // Clock Container click event for Play / Pause functionality
   clockOverlayContainer.addEventListener('click', () => {
     isPaused = !isPaused;
   });
 
-  // Hamburger Menu Toggle
   hamburgerMenu.addEventListener('click', () => {
-    if (mobileMenu.style.display === 'flex') {
-      mobileMenu.style.display = 'none';
+    if (navMenu.style.display === 'none' || navMenu.style.display === '') {
+      navMenu.style.display = 'flex';
     } else {
-      mobileMenu.style.display = 'flex';
+      navMenu.style.display = 'none';
     }
   });
 
