@@ -25,7 +25,6 @@
       margin: 0;
       list-style-type: none;
       touch-action: manipulation;
-      
     }
 
     body {
@@ -36,7 +35,7 @@
       position: relative;
     }
 
-    /* Background container that will be pixelated and inverted */
+    /* Background container */
     #background {
       position: absolute;
       top: 0;
@@ -61,7 +60,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      mix-blend-mode: difference; 
+      mix-blend-mode: difference;
     }
 
     .hamburger-menu {
@@ -71,7 +70,7 @@
       cursor: pointer;
       margin-right: 20px;
       z-index: 101;
-      mix-blend-mode: difference; 
+      mix-blend-mode: difference;
     }
 
     .hamburger-menu div {
@@ -95,14 +94,11 @@
     nav ul.desktop-menu li {
       font-size: 1.2em;
       color: lightyellow;
-      
     }
 
     a {
       color: inherit;
       text-decoration: none;
-     
-
     }
 
     /* Mobile Menu Styling */
@@ -119,7 +115,6 @@
       gap: 15px;
       padding: 50px 20px;
       z-index: 50;
-      mix-blend-mode: difference; /* Apply blending mode to mobile menu */
     }
 
     nav ul.mobile-menu li {
@@ -174,6 +169,22 @@
       transform: scale(5);
       filter: blur(0px);
       z-index: 20;
+    }
+
+    /* Container for clicked images */
+    #clicked-image-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-repeat: no-repeat;
+      background-size: auto;
+      background-position: center;
+      z-index: 8; /* Overlays #overlay-image-2 */
+      opacity: 0;
+      transition: opacity 1s ease;
+      width: auto;
+      height: auto;
     }
 
     #clock-overlay-container {
@@ -240,7 +251,7 @@
       transform: translate(-50%, -50%);
       z-index: 7;
       pointer-events: none;
-      mix-blend-mode: difference;
+      mix-blend-mode: difference; /* Keep blending mode */
     }
 
     @media screen and (max-width: 768px) {
@@ -341,6 +352,9 @@
   </div>
 </div>
 
+<!-- Container for clicked images -->
+<div id="clicked-image-container"></div>
+
 <!-- Clock and Overlay Container -->
 <div id="clock-overlay-container">
   <img id="overlay-image" src="https://i.postimg.cc/ZK0CjvDT/Night-school.png" alt="Overlay Image">
@@ -359,8 +373,10 @@
   const hamburgerMenu = document.getElementById('hamburger-menu');
   const navMenu = document.querySelector('.desktop-menu');
   const mobileMenu = document.getElementById('mobile-menu');
+  const clickedImageContainer = document.getElementById('clicked-image-container');
   const clockOverlayContainer = document.getElementById('clock-overlay-container');
   let isPaused = false;
+  let backgroundChangeTimeout;
 
   // Array of background images to morph between
   const backgroundImages = [
@@ -377,7 +393,11 @@
   function morphBackgroundImages() {
     if (isPaused) return;
     currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
-    document.getElementById('background').style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
+    setBackground(backgroundImages[currentImageIndex]);
+  }
+
+  function setBackground(imageUrl) {
+    document.getElementById('background').style.backgroundImage = `url('${imageUrl}')`;
   }
 
   function trembleImageItems() {
@@ -426,6 +446,27 @@
     }
     loop();
   }
+
+  // Add event listener to cluster images
+  imageItems.forEach(image => {
+    image.addEventListener('click', (event) => {
+      const clickedImageUrl = event.target.src;
+      clearTimeout(backgroundChangeTimeout);
+
+      // Display clicked image above overlay-image-2 but below everything else
+      clickedImageContainer.style.backgroundImage = `url('${clickedImageUrl}')`;
+      clickedImageContainer.style.opacity = 1;
+      clickedImageContainer.style.transition = 'opacity 1s ease';
+      clickedImageContainer.style.width = event.target.naturalWidth + 'px';
+      clickedImageContainer.style.height = event.target.naturalHeight + 'px';
+
+      // Keep the clicked image for 6 seconds
+      backgroundChangeTimeout = setTimeout(() => {
+        clickedImageContainer.style.opacity = 0;
+        animateItems();
+      }, 6000);
+    });
+  });
 
   function animateItems() {
     setInterval(() => trembleImageItems(), 100);
