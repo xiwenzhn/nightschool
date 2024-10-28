@@ -57,23 +57,37 @@
     /* Content container */
     .content {
       position: absolute;
-  z-index: 2;
-  top: 30%;
-  left: 30%;  /* Increased left margin */
-  right: 30%;  /* Increased right margin */
-  bottom: 10%;
-  padding: 20px;
-  line-height: 1.6em;
-  color: lightyellow;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch; /* Enables smooth scrolling */
-  overflow-y: scroll; /* Ensure the content is scrollable */
-  scrollbar-width: none; /* Firefox */
+      z-index: 2;
+      top: 30%;
+      left: 30%;
+      right: 30%;
+      bottom: 10%;
+      padding: 20px;
+      line-height: 1.6em;
+      color: lightyellow;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch; /* Enables smooth scrolling */
+      overflow-y: scroll; /* Ensure the content is scrollable */
+      scrollbar-width: none; /* Firefox */
     }
 
     p {
       margin-bottom: 20px;
     }
+    
+    @media screen and (max-width: 768px) {
+  .content {
+    padding: 10px;
+    font-size: 1em;
+    left: 5%;
+    right: 5%;
+    width: 90%;
+  }
+}
+
+p {
+  margin-bottom: 20px;
+}
 
     /* Noise layer styling */
     #noiseCanvas {
@@ -114,6 +128,57 @@
       font-size: 1.2em;
       font-family: bianzhidai-Base;
     }
+
+    /* Thumbnail container styling */
+    #thumbnail-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 10;
+      cursor: pointer;
+    }
+
+    #thumbnail {
+      width: 200px;
+      height: auto;
+      border: 1px solid #FFFFFF; /* Made the border thinner */
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      overflow: hidden; /* Prevents any overflow from the image */
+    }
+
+    #thumbnail img {
+      display: block; /* Removes any space below the image */
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #thumbnail-container:hover #thumbnail {
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
+
+    /* Hover text styling */
+    #hover-text {
+      position: absolute;
+      bottom: 100%;
+      right: 0;
+      width: max-content;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #FFFFFF;
+      font-size: 10pt;
+      font-family: CirrusCumulus;
+      border-radius: 5px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+    }
+
+    #thumbnail-container:hover #hover-text {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -137,6 +202,16 @@
 
 <!-- Overlay Image -->
 <img id="overlay-image" src="https://i.postimg.cc/ZK0CjvDT/Night-school.png" alt="Overlay Image">
+
+<!-- Thumbnail Preview with Hover Text -->
+<div id="thumbnail-container">
+  <div id="hover-text">Last Year's Night School Here</div>
+  <a href="https://nightschool.yaleschoolofart.org/" target="_blank">
+    <div id="thumbnail">
+      <img src="Screenshot 2024-10-28 at 11.09.45 AM.png" alt="Night School Thumbnail">
+    </div>
+  </a>
+</div>
 
 <script>
   // Adding noise canvas
